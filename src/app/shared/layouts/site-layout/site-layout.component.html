@@ -1,0 +1,43 @@
+<mat-toolbar>
+  <span>Target Logic</span>
+    <div class="search">
+      <mat-form-field class="example-full-width">
+        <button mat-button matPrefix mat-icon-button aria-label="Search">
+          <mat-icon>search</mat-icon>
+        </button>
+        <input
+          matInput
+          aria-label="Поиск"
+          [matAutocomplete]="auto"
+          [(ngModel)]="searchCtrl"
+          (ngModelChange)="handleChange()">
+        <button mat-button *ngIf="searchCtrl" matSuffix mat-icon-button aria-label="Clear" (click)="onClick()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let state of states">
+            <div class="search-flex" [routerLink]="[state.href]">
+              <img class="search-item__img" aria-hidden [src]="state.img" height="40" width="40">
+
+              <div class="search-item__text">
+                <span>{{state.name}}</span>
+                <span class="search-item__title">{{state.title}}</span>
+              </div>
+            </div>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field></div>
+
+</mat-toolbar>
+
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
+
+
+
+
+
+
+

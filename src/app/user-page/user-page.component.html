@@ -1,0 +1,47 @@
+
+
+  <div class="user-info flex-row" *ngIf="userData.username; else loader">
+    <div class="flex-col">
+      <img [src]="userData.profile_pic_url" height="150" width="150">
+    </div>
+    <div class="flex-col item2">
+      <h1>{{userData.username}}</h1>
+      <h4>id {{userData.id}}</h4>
+      <span>{{userData.full_name}}</span>
+      <span>{{userData.biography}}</span>
+      <span>{{userData.external_url}}</span>
+    </div>
+    <div class="flex-col item3">
+      <span>публикаций</span>
+      <h1>{{userData.edge_owner_to_timeline_media.count}}</h1>
+    </div><div class="flex-col item3">
+      <span>подписчиков</span>
+      <h1>{{userData.edge_followed_by.count}}</h1>
+    </div><div class="flex-col item3">
+      <span>подписок</span>
+      <h1>{{userData.edge_follow.count}}</h1>
+    </div>
+  </div>
+
+
+
+  <div class="user-media" *ngIf="isTable; else count">
+    <app-table-user-posts [postsList]="userData.edge_owner_to_timeline_media.edges"></app-table-user-posts>
+
+    <button mat-raised-button class="more-button" (click)="onMore()" color="primary">Загрузить еще</button>
+    <button mat-raised-button class="more-button" (click)="onMoreAll()" color="primary">Загрузить все</button>
+
+  </div>
+
+
+
+
+
+<ng-template #loader>
+  <div></div>
+</ng-template>
+
+<ng-template #count>
+  <mat-spinner></mat-spinner>
+  <h3 *ngIf="userData.edge_owner_to_timeline_media">Загрузка постов {{userData.edge_owner_to_timeline_media?.edges.length}}/{{userData.edge_owner_to_timeline_media?.count}}</h3>
+</ng-template>
