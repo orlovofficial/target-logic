@@ -1,3 +1,35 @@
 .user-media {
   display: block;
 }
+.cover {
+  border-radius: 4px;
+  overflow: hidden;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+}
+td.mat-cell, th.mat-header-cell {
+  padding: 8px;
+}
+
+/* Column Widths */
+.mat-table {
+  width: 100%;
+}
+
+.mat-column-select {
+  max-width: 60px;
+}
+.mat-column-edge_media_to_caption {
+  max-width: 500px;
+}
+.mat-column-accessibility_caption {
+  max-width: 300px;
+}
+.mat-column-location {
+  max-width: 150px;
+}
+.mat-column-taken_at_timestamp {
+  max-width: 90px;
+}

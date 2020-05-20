@@ -1,35 +1,78 @@
 
 
-  <div class="user-info flex-row" *ngIf="userData.username; else loader">
+  <div class="user-info flex-row" *ngIf="userData.username">
     <div class="flex-col">
       <img [src]="userData.profile_pic_url" height="150" width="150">
     </div>
     <div class="flex-col item2">
-      <h1>{{userData.username}}</h1>
-      <h4>id {{userData.id}}</h4>
-      <span>{{userData.full_name}}</span>
+      <h1>{{userData.username}} <span class="verification" *ngIf="userData.is_verified">Verif</span></h1>
+
+      <h5>ID {{userData.id}}</h5>
+      <h2>{{userData.full_name}}</h2>
       <span>{{userData.biography}}</span>
-      <span>{{userData.external_url}}</span>
+      <a href="{{userData.external_url}}">{{userData.external_url}}</a>
     </div>
     <div class="flex-col item3">
       <span>публикаций</span>
-      <h1>{{userData.edge_owner_to_timeline_media.count}}</h1>
+      <h1>{{(+userData.edge_owner_to_timeline_media.count).toLocaleString('ru-RU')}}</h1>
     </div><div class="flex-col item3">
       <span>подписчиков</span>
-      <h1>{{userData.edge_followed_by.count}}</h1>
+      <h1>{{(+userData.edge_followed_by.count).toLocaleString('ru-RU')}}</h1>
     </div><div class="flex-col item3">
       <span>подписок</span>
-      <h1>{{userData.edge_follow.count}}</h1>
+      <h1>{{(+userData.edge_follow.count).toLocaleString('ru-RU')}}</h1>
     </div>
   </div>
+
+
+
+<div class="user-media" *ngIf="userData.username">
+
+  <span>Вид </span>
+
+  <mat-button-toggle-group #view="matButtonToggleGroup">
+    <mat-button-toggle value="gallery" aria-label="Gallery">
+      <mat-icon>insert_photo</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="table" aria-label="Table">
+      <mat-icon>view_list</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="code" aria-label="Code">
+      <mat-icon>format_align_justify</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <span>Фильтры </span>
+
+  <mat-button-toggle-group #filter="matButtonToggleGroup">
+    <mat-button-toggle value="filter" aria-label="Gallery">
+      <mat-icon>filter_list</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+
+
+  <button mat-raised-button *ngIf="!isMore" (click)="onMoreAll()" color="primary"><mat-icon>cloud_upload</mat-icon> Загрузить все</button>
+
+</div>
+
+
+
+
+<div class="gallery" *ngIf="userData.username">
+  <div class="gallery__post" *ngFor="let post of userData.edge_owner_to_timeline_media.edges">
+    <img src="{{post.node?.thumbnail_resources[0].src}}" alt="">
+  </div>
+</div>
+
+
 
 
 
   <div class="user-media" *ngIf="isTable; else count">
     <app-table-user-posts [postsList]="userData.edge_owner_to_timeline_media.edges"></app-table-user-posts>
 
-    <button mat-raised-button class="more-button" (click)="onMore()" color="primary">Загрузить еще</button>
-    <button mat-raised-button class="more-button" (click)="onMoreAll()" color="primary">Загрузить все</button>
+    <button mat-raised-button class="more-button" *ngIf="!isMore" (click)="onMore()" color="primary"><mat-icon>add</mat-icon> Загрузить еще</button>
+
 
   </div>
 
@@ -37,11 +80,15 @@
 
 
 
-<ng-template #loader>
-  <div></div>
-</ng-template>
 
 <ng-template #count>
-  <mat-spinner></mat-spinner>
-  <h3 *ngIf="userData.edge_owner_to_timeline_media">Загрузка постов {{userData.edge_owner_to_timeline_media?.edges.length}}/{{userData.edge_owner_to_timeline_media?.count}}</h3>
+  <div class="user-media flex-row" *ngIf="!userData.is_private">
+    <mat-spinner diameter="32"></mat-spinner>
+    <h3 *ngIf="userData.edge_owner_to_timeline_media">Загрузка постов {{userData.edge_owner_to_timeline_media?.edges.length}}/{{userData.edge_owner_to_timeline_media?.count}}</h3>
+  </div>
 </ng-template>
+
+
+<div class="user-media" *ngIf="userData.is_private">
+  <h2><mat-icon>lock</mat-icon> Это закрытый аккаунт</h2>
+</div>

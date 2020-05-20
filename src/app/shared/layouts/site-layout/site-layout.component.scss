@@ -1,8 +1,11 @@
+.logo {
+  margin-top: 6px;
+}
 .search {
   min-width: 200px;
   max-width: 500px;
   width: 100%;
-  margin-left: 53px;
+  margin-left: 32px;
   font-size: 0.95rem;
   align-self: flex-end;
   margin-bottom: -2px;
@@ -37,6 +40,18 @@
 .content {
   max-width: 100%;
   padding: 16px;
+}
+
+.verification {
+  width: 12px;
+  height: 12px;
+  background-repeat: no-repeat;
+  text-indent: 110%;
+  overflow: hidden;
+  color: transparent;
+  background-image: url("/assets/verification_small.png");
+  font-size: 0.77rem;
+  margin-left: 2px;
 }
 
 

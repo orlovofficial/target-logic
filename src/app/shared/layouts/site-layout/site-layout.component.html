@@ -1,5 +1,9 @@
 <mat-toolbar>
-  <span>Target Logic</span>
+    <div class="logo">
+      <a [routerLink]="['/']">
+        <img src="/assets/logo.png" alt="Target Logic">
+      </a>
+    </div>
     <div class="search">
       <mat-form-field class="example-full-width">
         <button mat-button matPrefix mat-icon-button aria-label="Search">
@@ -20,13 +24,15 @@
               <img class="search-item__img" aria-hidden [src]="state.img" height="40" width="40">
 
               <div class="search-item__text">
-                <span>{{state.name}}</span>
+                <span>{{state.name}} <span class="verification" *ngIf="state.is_verified">Verif</span></span>
+
                 <span class="search-item__title">{{state.title}}</span>
               </div>
             </div>
           </mat-option>
         </mat-autocomplete>
-      </mat-form-field></div>
+      </mat-form-field>
+    </div>
 
 </mat-toolbar>
 

@@ -23,6 +23,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     MatProgressSpinnerModule,
     MatTableModule,
     MatSortModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -40,8 +40,8 @@ export class UserPageComponent implements OnInit {
       .subscribe(
         user => {
           this.userData = user.graphql.user;
-          this.isTable = true;
-          console.log(user.graphql.user);
+          this.isTable = user.graphql.user.is_private ? false : true;
+
         }
     )
   }
@@ -53,8 +53,6 @@ export class UserPageComponent implements OnInit {
       this.isTable = false;
       this.instagramApiService.getPosts(this.userData.id, this.userData.edge_owner_to_timeline_media.page_info.end_cursor)
         .subscribe(res => {
-          console.log(res);
-
           Array.prototype.push.apply(this.userData.edge_owner_to_timeline_media.edges, res.data.user.edge_owner_to_timeline_media.edges);
 
           this.userData.edge_owner_to_timeline_media.page_info.end_cursor = res.data.user.edge_owner_to_timeline_media.page_info.end_cursor;

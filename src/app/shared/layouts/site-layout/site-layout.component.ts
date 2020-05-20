@@ -10,6 +10,7 @@ export interface State {
   title: string;
   position: number;
   href?: string;
+  is_verified?: boolean;
 }
 
 @Component({
@@ -33,7 +34,6 @@ export class SiteLayoutComponent implements OnInit {
 
   handleChange(){
     this.instagramApiService.search(encodeURIComponent(this.searchCtrl)).subscribe(res => {
-      console.log(res);
 
       this.states = [];
       res.users.forEach(u => {this.states.push({
@@ -41,7 +41,8 @@ export class SiteLayoutComponent implements OnInit {
         name: u.user.username,
         title: u.user.full_name,
         position: u.position,
-        href: `/user/${u.user.username}`
+        href: `/user/${u.user.username}`,
+        is_verified: u.user.is_verified
       })});
 
       res.hashtags.forEach(u => {this.states.push({

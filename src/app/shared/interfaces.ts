@@ -18,7 +18,7 @@ export interface Post {
   location?: any;
   edge_media_to_caption?: any;
   taken_at_timestamp?: number;
-  edge_liked_by?: any;
+  edge_media_preview_like?: any;
   edge_media_to_comment?: any;
   video_view_count?: number;
   id?: string
