@@ -40,6 +40,7 @@ export class UserPageComponent implements OnInit {
       .subscribe(
         user => {
           this.userData = user.graphql.user;
+          console.log(this.userData);
           this.isTable = user.graphql.user.is_private ? false : true;
 
         }

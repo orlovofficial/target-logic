@@ -11,6 +11,7 @@ export class InstagramApiService {
   constructor(private  http: HttpClient) { }
 
   search(query: string): Observable<any> {
+    const search: string = encodeURIComponent(query);
     return this.http.get<any>(`https://www.instagram.com/web/search/topsearch/?context=blended&query=${query}&include_reel=true`);
   }
 
