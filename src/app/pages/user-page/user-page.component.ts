@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import {distinctUntilChanged, switchMap, tap} from 'rxjs/operators';
-import { of } from "rxjs";
-import { InstagramApiService } from "../shared/services/instagram-api.service";
-import { User } from "../shared/interfaces";
+import { switchMap, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { InstagramApiService } from '../../shared/services/instagram-api.service';
+import { User } from '../../shared/interfaces';
 
 @Component({
   selector: 'app-user-page',
@@ -40,7 +40,6 @@ export class UserPageComponent implements OnInit {
       .subscribe(
         user => {
           this.userData = user.graphql.user;
-          console.log(this.userData);
           this.isTable = user.graphql.user.is_private ? false : true;
 
         }

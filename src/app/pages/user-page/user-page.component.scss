@@ -2,19 +2,27 @@
   display: flex;
   flex-direction: column;
   padding: 0px 8px;
+  height: 100%;
+  align-self: flex-start;
 }
 
 .flex-row {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .user-media {
   margin-top: 32px;
+  h2 {
+    margin-left: 8px;
+    margin-bottom: -4px;
+  }
 }
 
 .user-info {
   margin: 0px -8px;
+  min-height: 190px;
   img {
     border-radius: 50%;
   }
@@ -23,20 +31,7 @@
   margin-left: 16px;
   flex-basis: 550px;
   padding-right: 128px;
-  h1 {
-    margin-bottom: 0;
-    font-size: 2rem;
-  }
-  h2 {
-    margin-bottom: -5px;
-    font-size: 1rem;
-  }
-  h5 {
-    color: #999999;
-  }
-}
-.item3 {
-  flex-basis: 400px;
+  align-self: flex-start;
 }
 
 .more-button {
@@ -48,11 +43,29 @@ a {
   color: #3f51b5;
 }
 
+h1 {
+  margin-bottom: 0;
+  font-size: 2rem;
+}
+h2 {
+  margin-bottom: -6px;
+  font-size: 1rem;
+}
 h3 {
+  margin: 0;
   margin-left: 16px;
   font-weight: normal;
   font-size: 1rem;
-  color: #777777;
+  color: #999999;
+}
+h4 {
+  color: #999999;
+  font-size: 0.8rem;
+  margin-bottom: -2px;
+}
+h5 {
+  color: #999999;
+  font-size: 0.8rem;
 }
 
 .verification {
@@ -66,34 +79,10 @@ h3 {
   font-size: 1.4rem;
 }
 
-.gallery {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: stretch;
-  margin: 28px 0 0 -8px;
-  &__post {
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    margin: 8px;
-    border-radius: 6px;
-    img {
-      width: 100%;
-    }
-  }
-}
-.mat-icon {
-  font-size: 18px;
-  width: 24px;
-  height: 18px;
-  margin-top: -3px;
-}
-
-.mat-button-toggle-group {
-  margin-right: 24px;
+.center {
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 

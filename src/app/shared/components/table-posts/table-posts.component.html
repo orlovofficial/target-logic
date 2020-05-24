@@ -25,7 +25,7 @@
 
 
   <ng-container matColumnDef="thumbnail_src">
-    <th mat-header-cell *matHeaderCellDef>Пост</th>
+    <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
       <div class="cover">
         <img src={{element.thumbnail_src}} width="75">
@@ -45,22 +45,22 @@
 
   <ng-container matColumnDef="taken_at_timestamp">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата </th>
-    <td mat-cell *matCellDef="let element"> {{element.taken_at_timestamp | date: 'dd.MM.yyyy HH:mm zzzz'}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.taken_at_timestamp | date: 'dd.MM.yyyy HH:mm'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="edge_media_preview_like">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Лайки </th>
-    <td mat-cell *matCellDef="let element"> {{(+element.edge_media_preview_like).toLocaleString('ru-RU')}} </td>
+    <td mat-cell *matCellDef="let element">{{(+element.edge_media_preview_like).toLocaleString('ru-RU')}}</td>
   </ng-container>
 
   <ng-container matColumnDef="edge_media_to_comment">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Комментарии </th>
-    <td mat-cell *matCellDef="let element"> {{(+element.edge_media_to_comment).toLocaleString('ru-RU')}} </td>
+    <td mat-cell *matCellDef="let element">{{(+element.edge_media_to_comment).toLocaleString('ru-RU')}}</td>
   </ng-container>
 
   <ng-container matColumnDef="video_view_count">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Просмотры </th>
-    <td mat-cell *matCellDef="let element"> {{(+(element?.video_view_count ? element.video_view_count : 0)).toLocaleString('ru-RU')}} </td>
+    <td mat-cell *matCellDef="let element">{{(+(element?.video_view_count ? element.video_view_count : 0)).toLocaleString('ru-RU')}}</td>
   </ng-container>
 
   <ng-container matColumnDef="id">
@@ -75,7 +75,7 @@
 
   <ng-container matColumnDef="__typename">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Тип </th>
-    <td mat-cell *matCellDef="let element"> {{element.__typename}} </td>
+    <td mat-cell *matCellDef="let element"><small>{{element.__typename}}</small></td>
   </ng-container>
 
   <ng-container matColumnDef="owner">
@@ -83,8 +83,13 @@
     <td mat-cell *matCellDef="let element"> {{element.owner}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="comments_disabled">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Комментарии отключены  </th>
+    <td mat-cell *matCellDef="let element"> {{element.comments_disabled}} </td>
+  </ng-container>
+
   <ng-container matColumnDef="accessibility_caption">
-    <th mat-header-cell *matHeaderCellDef> Описание </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Описание </th>
     <td mat-cell *matCellDef="let element"> {{element.accessibility_caption}} </td>
   </ng-container>
 

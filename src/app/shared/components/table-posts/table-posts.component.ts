@@ -4,11 +4,11 @@ import { MatSort } from "@angular/material/sort";
 import { SelectionModel } from "@angular/cdk/collections";
 
 @Component({
-  selector: 'app-table-user-posts',
-  templateUrl: './table-user-posts.component.html',
-  styleUrls: ['./table-user-posts.component.scss']
+  selector: 'app-table-posts',
+  templateUrl: './table-posts.component.html',
+  styleUrls: ['./table-posts.component.scss']
 })
-export class TableUserPostsComponent implements OnInit {
+export class TablePostsComponent implements OnInit {
 
   @Input() postsList: any;
 
@@ -21,10 +21,11 @@ export class TableUserPostsComponent implements OnInit {
     'edge_media_preview_like',
     'edge_media_to_comment',
     'video_view_count',
-    'id',
+    //'id',
     'shortcode',
     '__typename',
-    'owner',
+    //'owner',
+    //'comments_disabled',
     'accessibility_caption'
   ];
   dataSource;
@@ -71,6 +72,7 @@ export class TableUserPostsComponent implements OnInit {
         shortcode: p.node.shortcode,
         __typename: p.node.__typename.slice(5),
         owner: p.node.owner.username,
+        comments_disabled: p.node.comments_disabled,
         accessibility_caption: p.node.accessibility_caption
       };
       return post;

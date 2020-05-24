@@ -1,5 +1,6 @@
 export interface User {
   profile_pic_url?: string;
+  profile_pic_url_hd?: string;
   username?: string;
   id?: string;
   full_name?: string;
@@ -11,20 +12,61 @@ export interface User {
   edge_follow?: any;
   edge_followed_by?: any;
   edge_owner_to_timeline_media?: any;
+  business_category_name?: string;
+  category_enum?: string;
+  category_id?: string;
+}
+
+export interface Comment {
+  created_at: number;
+  id: string;
+  owner: User;
+  text: string;
 }
 
 export interface Post {
   thumbnail_src?: string;
-  location?: any;
-  edge_media_to_caption?: any;
+  location?: {
+    id: string;
+    name: string;
+    slug: string;
+  };
+  edge_media_to_caption?: {
+    edges: Array<{
+      node: {
+        text: string;
+      };
+    }>;
+  };
   taken_at_timestamp?: number;
-  edge_media_preview_like?: any;
-  edge_media_to_comment?: any;
+  edge_media_preview_like?: {
+    count: number;
+  };
+  edge_media_to_comment?: {
+    count: number;
+    edges: Comment[];
+    page_info: {
+      end_cursor: string;
+      has_next_page: boolean;
+    };
+  };
   video_view_count?: number;
   id?: string
   shortcode?: string;
   __typename?: string;
+  owner?: User;
   comments_disabled?: boolean;
-  owner?: any;
+  edge_media_to_tagged_user?: {
+    edges: any;
+  };
   accessibility_caption?: string;
+}
+
+export interface Search {
+  img: string;
+  name: string;
+  title: string;
+  position: number;
+  href?: string;
+  is_verified?: boolean;
 }
