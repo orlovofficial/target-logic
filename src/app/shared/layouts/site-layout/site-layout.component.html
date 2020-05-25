@@ -4,38 +4,7 @@
       <img src="/assets/logo.png" alt="Target Logic">
     </a>
   </div>
-  <div class="search">
-    <mat-form-field class="example-full-width">
-      <button mat-button matPrefix mat-icon-button aria-label="Search">
-        <mat-icon>search</mat-icon>
-      </button>
-      <input
-        matInput
-        aria-label="Поиск"
-        [matAutocomplete]="auto"
-        [(ngModel)]="searchCtrl"
-        (ngModelChange)="handleChange($event)">
-      <button mat-button *ngIf="searchCtrl" matSuffix mat-icon-button aria-label="Clear" (click)="onClick()">
-        <mat-icon>close</mat-icon>
-      </button>
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let item of search">
-          <a [routerLink]="[item.href]">
-            <div class="search-flex">
-              <img class="search-item__img" [src]="item.img" height="40" width="40">
-
-              <div class="search-item__text">
-                <span>{{item.name}} <span class="verification" *ngIf="item.is_verified">Verif</span></span>
-
-                <span class="search-item__title">{{item.title}}</span>
-              </div>
-            </div>
-          </a>
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </div>
-
+  <app-search></app-search>
 </mat-toolbar>
 
 

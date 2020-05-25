@@ -11,7 +11,14 @@ export interface User {
   edge_felix_video_timeline?: any;
   edge_follow?: any;
   edge_followed_by?: any;
-  edge_owner_to_timeline_media?: any;
+  edge_owner_to_timeline_media?: {
+    edges: Post[],
+    count: number,
+    page_info: {
+      end_cursor: string,
+      has_next_page: boolean
+    }
+  };
   business_category_name?: string;
   category_enum?: string;
   category_id?: string;
@@ -26,6 +33,7 @@ export interface Comment {
 
 export interface Post {
   thumbnail_src?: string;
+  display_url?: string;
   location?: {
     id: string;
     name: string;
@@ -69,4 +77,13 @@ export interface Search {
   position: number;
   href?: string;
   is_verified?: boolean;
+}
+
+export interface SearchState {
+  searchList: Search[]
+}
+
+export interface UserPageState {
+  data: User,
+  viewType: string
 }

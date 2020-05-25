@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { UserPageState } from '../../interfaces';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../reducers';
 
 @Component({
   selector: 'app-gallery',
@@ -7,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GalleryComponent implements OnInit {
 
-  constructor() { }
+  userPage$: Observable<UserPageState>;
+
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.userPage$ = this.store.select('userPage');
   }
 
 }

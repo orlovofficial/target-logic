@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { switchMap, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import { InstagramApiService } from '../../shared/services/instagram-api.service';
-import { User } from '../../shared/interfaces';
+import { UserPageState } from '../../shared/interfaces';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../reducers';
+import { load, pushPost } from '../../reducers/userPage/user-page.action';
 
 @Component({
   selector: 'app-user-page',
@@ -11,65 +14,52 @@ import { User } from '../../shared/interfaces';
   styleUrls: ['./user-page.component.scss']
 })
 export class UserPageComponent implements OnInit {
-  isMore: boolean = false;
-  isMoreAll: boolean = false;
-  isTable: boolean = false;
-  userData: User = {};
+
+  userPage$: Observable<UserPageState>;
 
   constructor(
     private route: ActivatedRoute,
-    private instagramApiService: InstagramApiService
-  ) { }
+    private instagramApiService: InstagramApiService,
+    private store: Store<AppState>
+  ) {
+  }
 
   ngOnInit(): void {
+    this.userPage$ = this.store.select('userPage');
+
     this.route.params
       .pipe(
-        tap(() => {
-          this.userData = {};
-          this.isMore = false;
-          this.isMoreAll = false;
-          this.isTable = false;
-        }),
         switchMap((params: Params) => {
           if (params['id']) {
-            return this.instagramApiService.getUserByUsername(params['id'])
+            return this.instagramApiService.getUserByUsername(params['id']);
           }
-          return of(null)
+          return of(null);
         })
       )
       .subscribe(
         user => {
-          this.userData = user.graphql.user;
-          this.isTable = user.graphql.user.is_private ? false : true;
-
+          this.store.dispatch(load({
+            ...user.graphql.user,
+            edge_owner_to_timeline_media: {
+              ...user.graphql.user.edge_owner_to_timeline_media,
+              edges: user.graphql.user.edge_owner_to_timeline_media.edges.map(({node}) => ({...node}))
+            }
+          }));
         }
-    )
+      );
   }
 
-  onMore() {
-
-    if (this.userData.edge_owner_to_timeline_media.page_info.end_cursor) {
-      this.isMore = true;
-      this.isTable = false;
-      this.instagramApiService.getPosts(this.userData.id, this.userData.edge_owner_to_timeline_media.page_info.end_cursor)
-        .subscribe(res => {
-          Array.prototype.push.apply(this.userData.edge_owner_to_timeline_media.edges, res.data.user.edge_owner_to_timeline_media.edges);
-
-          this.userData.edge_owner_to_timeline_media.page_info.end_cursor = res.data.user.edge_owner_to_timeline_media.page_info.end_cursor;
-
-          this.isMore = this.userData.edge_owner_to_timeline_media.page_info.end_cursor ? false : true;
-          if (!this.isMore && this.isMoreAll) {
-            this.onMore();
-          } else {
-            this.isTable = true;
-          }
-        });
+  onLoad(id, {end_cursor, has_next_page}) {
+    if (has_next_page) {
+      this.instagramApiService.getPosts(id, end_cursor).subscribe(({data}) => {
+        this.store.dispatch(pushPost({
+          edges: [...data.user.edge_owner_to_timeline_media.edges.map(post => post.node)],
+          page_info: data.user.edge_owner_to_timeline_media.page_info
+        }));
+      })
     }
-
   }
 
-  onMoreAll() {
-    this.isMoreAll = true;
-    this.onMore();
-  }
+
+
 }

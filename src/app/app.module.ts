@@ -27,6 +27,12 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { ToolbarComponent } from './shared/components/toolbar/toolbar.component';
 import { GalleryComponent } from './shared/components/gallery/gallery.component';
 import { EditorComponent } from './shared/components/editor/editor.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import {searchReducer} from "./reducers/search/search.reducer";
+import { SearchComponent } from './shared/components/search/search.component';
+import { userPageReducer } from './reducers/userPage/user-page.reducer';
 
 
 @NgModule({
@@ -39,7 +45,8 @@ import { EditorComponent } from './shared/components/editor/editor.component';
     TablePostsComponent,
     ToolbarComponent,
     GalleryComponent,
-    EditorComponent
+    EditorComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +67,11 @@ import { EditorComponent } from './shared/components/editor/editor.component';
     MatSortModule,
     MatCheckboxModule,
     MatButtonToggleModule,
+    StoreModule.forRoot({
+      search: searchReducer,
+      userPage: userPageReducer
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]

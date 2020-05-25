@@ -12,7 +12,7 @@ export class InstagramApiService {
 
   search(query: string): Observable<any> {
     const search: string = encodeURIComponent(query);
-    return this.http.get<any>(`https://www.instagram.com/web/search/topsearch/?context=blended&query=${query}&include_reel=true`);
+    return this.http.get<any>(`https://www.instagram.com/web/search/topsearch/?context=blended&query=${search}&include_reel=true`);
   }
 
   getUserByUsername(username: string): Observable<any> {

@@ -1,13 +1,13 @@
 <div class="toolbar">
   <div class="toolbar_left">
     <mat-button-toggle-group value="table-posts">
-      <mat-button-toggle value="gallery" aria-label="Gallery">
+      <mat-button-toggle (change)="onChange($event.value)" value="gallery" aria-label="Gallery">
         <mat-icon>insert_photo</mat-icon>
       </mat-button-toggle>
-      <mat-button-toggle value="table-posts" aria-label="Table">
+      <mat-button-toggle (change)="onChange($event.value)" value="table-posts" aria-label="Table">
         <mat-icon>view_list</mat-icon>
       </mat-button-toggle>
-      <mat-button-toggle value="editor" aria-label="Editor">
+      <mat-button-toggle (change)="onChange($event.value)" value="editor" aria-label="Editor">
         <mat-icon>format_align_justify</mat-icon>
       </mat-button-toggle>
     </mat-button-toggle-group>
