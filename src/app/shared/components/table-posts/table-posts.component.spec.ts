@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { TableUserPostsComponent } from './table-user-posts.component';
+import { TablePostsComponent } from './table-posts.component';
 import {MatTableModule} from '@angular/material/table';
 
 describe('TableUserPostsComponent', () => {
-  let component: TableUserPostsComponent;
-  let fixture: ComponentFixture<TableUserPostsComponent>;
+  let component: TablePostsComponent;
+  let fixture: ComponentFixture<TablePostsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableUserPostsComponent ]
+      declarations: [ TablePostsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TableUserPostsComponent);
+    fixture = TestBed.createComponent(TablePostsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

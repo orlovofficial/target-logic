@@ -1,16 +1,16 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from "@angular/material/sort";
 import { SelectionModel } from "@angular/cdk/collections";
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../reducers';
 
 @Component({
-  selector: 'app-table-user-posts',
-  templateUrl: './table-user-posts.component.html',
-  styleUrls: ['./table-user-posts.component.scss']
+  selector: 'app-table-posts',
+  templateUrl: './table-posts.component.html',
+  styleUrls: ['./table-posts.component.scss']
 })
-export class TableUserPostsComponent implements OnInit {
-
-  @Input() postsList: any;
+export class TablePostsComponent implements OnInit {
 
   displayedColumns: string[] = [
     'select',
@@ -21,10 +21,11 @@ export class TableUserPostsComponent implements OnInit {
     'edge_media_preview_like',
     'edge_media_to_comment',
     'video_view_count',
-    'id',
+    //'id',
     'shortcode',
     '__typename',
-    'owner',
+    //'owner',
+    //'comments_disabled',
     'accessibility_caption'
   ];
   dataSource;
@@ -54,28 +55,25 @@ export class TableUserPostsComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
 
-    this.dataSource = new MatTableDataSource(this.postsList.map(p => {
-      const post = {
-        thumbnail_src: p.node.thumbnail_resources[0].src,
-        location: p.node.location?.name,
-        edge_media_to_caption: p.node.edge_media_to_caption.edges[0]?.node.text,
-        taken_at_timestamp: new Date(p.node.taken_at_timestamp * 1000),
-        edge_media_preview_like: p.node.edge_media_preview_like.count,
-        edge_media_to_comment: p.node.edge_media_to_comment.count,
-        video_view_count: p.node.video_view_count,
-        id: p.node.id,
-        shortcode: p.node.shortcode,
-        __typename: p.node.__typename.slice(5),
-        owner: p.node.owner.username,
-        accessibility_caption: p.node.accessibility_caption
-      };
-      return post;
-    }));
-    this.dataSource.sort = this.sort;
+    this.store.select('userPage').subscribe(({data}) => {
+
+      this.dataSource = new MatTableDataSource(data.edge_owner_to_timeline_media?.edges.map(post => ({
+        ...post,
+        location: post.location?.name,
+        edge_media_preview_like: post.edge_media_preview_like.count,
+        edge_media_to_comment: post.edge_media_to_comment.count,
+        edge_media_to_caption: post.edge_media_to_caption.edges[0]?.node.text,
+        taken_at_timestamp: new Date(post.taken_at_timestamp * 1000),
+        owner: post.owner.username,
+        __typename: post.__typename.slice(5)
+      })));
+      this.dataSource.sort = this.sort;
+    });
+
   }
 
 }

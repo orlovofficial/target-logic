@@ -9,6 +9,9 @@
   display: flex;
   align-items: center;
 }
+.wrap-word {
+  word-wrap: break-word;
+}
 td.mat-cell, th.mat-header-cell {
   padding: 8px;
 }

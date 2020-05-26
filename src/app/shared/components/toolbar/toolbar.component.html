@@ -1,0 +1,29 @@
+<div *ngIf="userPage$ | async as user" class="toolbar" >
+  <div class="toolbar_left">
+    <mat-button-toggle-group value="{{user.viewType}}">
+      <mat-button-toggle (change)="onChange($event.value)" value="gallery" aria-label="Gallery">
+        <mat-icon>insert_photo</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle (change)="onChange($event.value)" value="table-posts" aria-label="Table">
+        <mat-icon>view_list</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle (change)="onChange($event.value)" value="editor" aria-label="Editor">
+        <mat-icon>format_align_justify</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-button-toggle value="filter" aria-label="Gallery">
+      <mat-icon>tune</mat-icon> <!--filter_list-->
+    </mat-button-toggle>
+  </div>
+
+  <div class="load-info" *ngIf="user.isLoadNow">
+    <mat-spinner diameter="18"></mat-spinner>
+    <h3>Загрузка постов <small>({{user.data.edge_owner_to_timeline_media.edges.length}} из {{user.data.edge_owner_to_timeline_media.count}})</small></h3>
+  </div>
+
+  <button *ngIf="!user.isLoadNow && user.data.edge_owner_to_timeline_media.page_info.has_next_page" mat-raised-button (click)="onLoadAll(user.data.id, user.data.edge_owner_to_timeline_media.page_info)">
+    <mat-icon>cloud_upload</mat-icon>
+    Загрузить все
+  </button>
+</div>
