@@ -1,10 +1,11 @@
 import { User, UserPageState } from '../../shared/interfaces';
 import { createReducer, on } from '@ngrx/store';
-import { load, pushPost, setViewType } from './user-page.action';
+import { clear, load, loadToggle, pushPost, setViewType } from './user-page.action';
 
 export const initialState: UserPageState = {
   data: {},
-  viewType: 'table-posts'
+  viewType: 'table-posts',
+  isLoadNow: false
 }
 
 const _userPageReducer = createReducer(initialState,
@@ -24,13 +25,20 @@ const _userPageReducer = createReducer(initialState,
         count: state.data.edge_owner_to_timeline_media.count,
         page_info: page_info
       }
-
-
     }
   })),
   on(setViewType, (state: UserPageState, {viewType}) => ({
     ...state,
     viewType
+  })),
+  on(clear, (state) => ({
+    ...state,
+    data: {},
+    isLoadNow: false
+  })),
+  on(loadToggle, (state) => ({
+    ...state,
+    isLoadNow: !state.isLoadNow
   }))
 );
 

@@ -85,5 +85,6 @@ export interface SearchState {
 
 export interface UserPageState {
   data: User,
-  viewType: string
+  viewType: string,
+  isLoadNow: boolean
 }

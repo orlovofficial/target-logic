@@ -15,3 +15,11 @@ export const setViewType = createAction(
   '[User Page] Set View Type',
   props<{viewType: string}>()
 );
+
+export const clear = createAction(
+  '[User Page] Clear'
+);
+
+export const loadToggle = createAction(
+  '[User Page] Load Toggle'
+);

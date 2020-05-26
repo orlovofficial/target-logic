@@ -1,7 +1,6 @@
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
 
-
   <ng-container matColumnDef="select">
     <th mat-header-cell *matHeaderCellDef>
       <mat-checkbox (change)="$event ? masterToggle() : null"
@@ -22,77 +21,77 @@
   </ng-container>
 
 
-
-
   <ng-container matColumnDef="thumbnail_src">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
-      <div class="cover">
-        <img src={{element.thumbnail_src}} width="75">
-      </div>
+      <a [routerLink]="['../../post', element.shortcode]">
+        <div class="cover">
+          <img src={{element.thumbnail_resources[0].src}} width="75">
+        </div>
+      </a>
     </td>
   </ng-container>
 
   <ng-container matColumnDef="location">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Геолокация </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Геолокация</th>
     <td mat-cell *matCellDef="let element"> {{element.location}} </td>
   </ng-container>
 
   <ng-container matColumnDef="edge_media_to_caption">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Комментарий </th>
-    <td mat-cell *matCellDef="let element"> {{element.edge_media_to_caption}} </td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Комментарий</th>
+    <td mat-cell *matCellDef="let element" class="wrap-word"> {{element.edge_media_to_caption}} </td>
   </ng-container>
 
   <ng-container matColumnDef="taken_at_timestamp">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Дата</th>
     <td mat-cell *matCellDef="let element"> {{element.taken_at_timestamp | date: 'dd.MM.yyyy HH:mm'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="edge_media_preview_like">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Лайки </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Лайки</th>
     <td mat-cell *matCellDef="let element">{{(+element.edge_media_preview_like).toLocaleString('ru-RU')}}</td>
   </ng-container>
 
   <ng-container matColumnDef="edge_media_to_comment">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Комментарии </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Комментарии</th>
     <td mat-cell *matCellDef="let element">{{(+element.edge_media_to_comment).toLocaleString('ru-RU')}}</td>
   </ng-container>
 
   <ng-container matColumnDef="video_view_count">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Просмотры </th>
-    <td mat-cell *matCellDef="let element">{{(+(element?.video_view_count ? element.video_view_count : 0)).toLocaleString('ru-RU')}}</td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Просмотры</th>
+    <td mat-cell
+        *matCellDef="let element">{{(+(element?.video_view_count ? element.video_view_count : 0)).toLocaleString('ru-RU')}}</td>
   </ng-container>
 
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
     <td mat-cell *matCellDef="let element"><small>{{element.id}}</small></td>
   </ng-container>
 
   <ng-container matColumnDef="shortcode">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Код </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Код</th>
     <td mat-cell *matCellDef="let element"><small>{{element.shortcode}}</small></td>
   </ng-container>
 
   <ng-container matColumnDef="__typename">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Тип </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Тип</th>
     <td mat-cell *matCellDef="let element"><small>{{element.__typename}}</small></td>
   </ng-container>
 
   <ng-container matColumnDef="owner">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Автор </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Автор</th>
     <td mat-cell *matCellDef="let element"> {{element.owner}} </td>
   </ng-container>
 
   <ng-container matColumnDef="comments_disabled">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Комментарии отключены  </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Комментарии отключены</th>
     <td mat-cell *matCellDef="let element"> {{element.comments_disabled}} </td>
   </ng-container>
 
   <ng-container matColumnDef="accessibility_caption">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Описание </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Описание</th>
     <td mat-cell *matCellDef="let element"> {{element.accessibility_caption}} </td>
   </ng-container>
-
 
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

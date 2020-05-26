@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, takeWhile } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { InstagramApiService } from '../../shared/services/instagram-api.service';
 import { UserPageState } from '../../shared/interfaces';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
-import { load, pushPost } from '../../reducers/userPage/user-page.action';
+import { clear, load, loadToggle, pushPost } from '../../reducers/userPage/user-page.action';
 
 @Component({
   selector: 'app-user-page',
@@ -31,6 +31,7 @@ export class UserPageComponent implements OnInit {
       .pipe(
         switchMap((params: Params) => {
           if (params['id']) {
+            this.store.dispatch(clear());
             return this.instagramApiService.getUserByUsername(params['id']);
           }
           return of(null);
@@ -49,16 +50,19 @@ export class UserPageComponent implements OnInit {
       );
   }
 
-  onLoad(id, {end_cursor, has_next_page}) {
+  onLoad(id, {end_cursor, has_next_page}): void {
     if (has_next_page) {
+      this.store.dispatch(loadToggle());
       this.instagramApiService.getPosts(id, end_cursor).subscribe(({data}) => {
         this.store.dispatch(pushPost({
           edges: [...data.user.edge_owner_to_timeline_media.edges.map(post => post.node)],
           page_info: data.user.edge_owner_to_timeline_media.page_info
         }));
-      })
+        this.store.dispatch(loadToggle());
+      });
     }
   }
+
 
 
 

@@ -61,14 +61,15 @@ export class TablePostsComponent implements OnInit {
 
     this.store.select('userPage').subscribe(({data}) => {
 
-      this.dataSource = new MatTableDataSource(data.edge_owner_to_timeline_media.edges.map(post => ({
+      this.dataSource = new MatTableDataSource(data.edge_owner_to_timeline_media?.edges.map(post => ({
         ...post,
         location: post.location?.name,
         edge_media_preview_like: post.edge_media_preview_like.count,
         edge_media_to_comment: post.edge_media_to_comment.count,
         edge_media_to_caption: post.edge_media_to_caption.edges[0]?.node.text,
         taken_at_timestamp: new Date(post.taken_at_timestamp * 1000),
-        owner: post.owner.username
+        owner: post.owner.username,
+        __typename: post.__typename.slice(5)
       })));
       this.dataSource.sort = this.sort;
     });

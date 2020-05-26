@@ -1,7 +1,15 @@
 <div class="gallery">
-
   <div class="gallery__item" *ngFor="let item of (userPage$ | async).data.edge_owner_to_timeline_media?.edges">
-    <img src={{item.thumbnail_resources[0].src}}>
-  </div>
 
+    <img src={{item.thumbnail_resources[0].src}}>
+
+    <a class="gallery__cover" [routerLink]="['../../post', item.shortcode]">
+      <h5>{{item.location?.name}}</h5>
+      <span>
+       <div><mat-icon>chat</mat-icon><h4>{{(+item.edge_media_to_comment.count).toLocaleString('ru-RU')}}</h4></div>
+       <div><mat-icon>favorite</mat-icon><h4>{{(+item.edge_media_preview_like.count).toLocaleString('ru-RU')}}</h4></div>
+      </span>
+    </a>
+
+  </div>
 </div>

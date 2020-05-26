@@ -1,14 +1,16 @@
 <div class="search">
-  <mat-form-field class="example-full-width">
+  <mat-form-field class="example-full-width" floatLabel="never">
     <button mat-button matPrefix mat-icon-button aria-label="Search">
       <mat-icon>search</mat-icon>
     </button>
     <input
       matInput
       aria-label="Поиск"
+      placeholder=" "
       [matAutocomplete]="auto"
       [(ngModel)]="searchCtrl"
-      (ngModelChange)="handleChange($event)">
+      (ngModelChange)="handleChange($event)"
+    >
     <button mat-button *ngIf="searchCtrl" matSuffix mat-icon-button aria-label="Clear" (click)="onClick()">
       <mat-icon>close</mat-icon>
     </button>

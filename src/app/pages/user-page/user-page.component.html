@@ -39,7 +39,7 @@
       <app-table-posts *ngSwitchDefault></app-table-posts>
     </container-element>
 
-    <button mat-raised-button class="more-button" color="primary" (click)="onLoad(user.data.id, user.data.edge_owner_to_timeline_media.page_info)">
+    <button *ngIf="!user.isLoadNow && user.data.edge_owner_to_timeline_media.page_info.has_next_page" mat-stroked-button class="more-button" color="primary" (click)="onLoad(user.data.id, user.data.edge_owner_to_timeline_media.page_info)">
       <mat-icon>add</mat-icon>
       Загрузить еще
     </button>
