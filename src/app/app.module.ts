@@ -10,6 +10,7 @@ import { MatToolbarModule} from "@angular/material/toolbar";
 import { UserPageComponent } from './pages/user-page/user-page.component';
 import { PostPageComponent } from './pages/post-page/post-page.component';
 import { TablePostsComponent } from './shared/components/table-posts/table-posts.component';
+import { TableCommentsComponent } from './shared/components/table-comments/table-comments.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -30,11 +31,12 @@ import { EditorComponent } from './shared/components/editor/editor.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import {searchReducer} from "./reducers/search/search.reducer";
+import { searchReducer } from './reducers/search/search.reducer';
 import { SearchComponent } from './shared/components/search/search.component';
 import { userPageReducer } from './reducers/userPage/user-page.reducer';
 import { postPageReducer } from './reducers/postPage/post-page.reducer';
 import { CommentsListComponent } from './shared/components/comments-list/comments-list.component';
+import { ToolbarCommentsComponent } from './shared/components/toolbar-comments/toolbar-comments.component';
 
 
 @NgModule({
@@ -45,11 +47,13 @@ import { CommentsListComponent } from './shared/components/comments-list/comment
     PostPageComponent,
     HomePageComponent,
     TablePostsComponent,
+    TableCommentsComponent,
     ToolbarComponent,
     GalleryComponent,
     EditorComponent,
     SearchComponent,
-    CommentsListComponent
+    CommentsListComponent,
+    ToolbarCommentsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,29 @@
+<div *ngIf="postPage$ | async as post" class="toolbar" >
+  <div class="toolbar_left">
+    <mat-button-toggle-group value="{{post.viewType}}">
+      <mat-button-toggle (change)="onChange($event.value)" value="comments-list" aria-label="List">
+        <mat-icon>chat</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle (change)="onChange($event.value)" value="table-comments" aria-label="Table">
+        <mat-icon>view_list</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle (change)="onChange($event.value)" value="editor" aria-label="Editor">
+        <mat-icon>format_align_justify</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-button-toggle value="filter" aria-label="Filter">
+      <mat-icon>tune</mat-icon> <!--filter_list-->
+    </mat-button-toggle>
+  </div>
+
+  <div class="load-info" *ngIf="post.isLoadNow">
+    <mat-spinner diameter="18"></mat-spinner>
+    <h3>Загрузка комментариев <small>({{(+post.data.edge_media_to_parent_comment.edges.length).toLocaleString('ru-RU')}} из {{(+post.data.edge_media_to_parent_comment.count).toLocaleString('ru-RU')}})</small></h3>
+  </div>
+
+  <button *ngIf="!post.isLoadNow && post.data.edge_media_to_parent_comment.page_info.has_next_page" mat-raised-button (click)="onLoadAll(post.data.shortcode, post.data.edge_media_to_parent_comment.page_info)">
+    <mat-icon>cloud_upload</mat-icon>
+    Загрузить все
+  </button>
+</div>

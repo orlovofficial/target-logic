@@ -6,27 +6,23 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../reducers';
 
 @Component({
-  selector: 'app-table-posts',
-  templateUrl: './table-posts.component.html',
-  styleUrls: ['./table-posts.component.scss']
+  selector: 'app-table-comments',
+  templateUrl: './table-comments.component.html',
+  styleUrls: ['./table-comments.component.scss']
 })
-export class TablePostsComponent implements OnInit {
+export class TableCommentsComponent implements OnInit {
 
   displayedColumns: string[] = [
     'select',
-    'thumbnail_src',
-    'location',
-    'edge_media_to_caption',
-    'taken_at_timestamp',
-    'edge_media_preview_like',
-    'edge_media_to_comment',
-    'video_view_count',
-    //'id',
-    'shortcode',
-    '__typename',
-    //'owner',
-    //'comments_disabled',
-    'accessibility_caption'
+    //'owner_id',
+    'pic',
+    'username',
+    //'is_verified',
+    'text',
+    'date',
+    'like',
+    'comments',
+    //'id'
   ];
   dataSource;
   selection = new SelectionModel<any>(true, []);
@@ -54,16 +50,17 @@ export class TablePostsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select('userPage').subscribe(({data}) => {
-      this.dataSource = new MatTableDataSource(data.edge_owner_to_timeline_media?.edges.map(post => ({
-        ...post,
-        location: post.location?.name,
-        edge_media_preview_like: post.edge_media_preview_like.count,
-        edge_media_to_comment: post.edge_media_to_comment.count,
-        edge_media_to_caption: post.edge_media_to_caption.edges[0]?.node.text,
-        taken_at_timestamp: new Date(+post.taken_at_timestamp * 1000),
-        owner: post.owner.username,
-        __typename: post.__typename.slice(5)
+    this.store.select('postPage').subscribe(({data}) => {
+      this.dataSource = new MatTableDataSource(data.edge_media_to_parent_comment?.edges.map(comment => ({
+        owner_id: comment.owner.id,
+        pic: comment.owner.profile_pic_url,
+        username: comment.owner.username,
+        is_verified: comment.owner.is_verified,
+        text: comment.text,
+        date: comment.created_at,
+        like: comment.edge_liked_by.count,
+        comments: comment.edge_threaded_comments.count,
+        id: comment.id
       })));
       this.dataSource.sort = this.sort;
     });

@@ -1,0 +1,30 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.mat-icon {
+  font-size: 18px;
+  width: 24px;
+  height: 18px;
+  margin-top: -3px;
+}
+
+.mat-button-toggle-group {
+  margin-right: 16px;
+}
+
+.load-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  h3 {
+    margin-bottom: 0;
+    margin-left: 8px;
+    color: #3f51b5;
+    small {
+      color: rgba(63, 81, 181, 0.6);
+    }
+  }
+}

@@ -24,11 +24,15 @@
         </div>
 
 
+
+
+
+
         <ul *ngIf="comment.edge_threaded_comments.count">
           <li *ngFor="let thread of comment.edge_threaded_comments.edges">
             <div class="row space-top">
               <div class="start">
-                <a [routerLink]="['../../user', comment.owner.username]">
+                <a [routerLink]="['../../user', thread.owner.username]">
                   <img src="{{thread.owner.profile_pic_url}}" class="userpic" width="40" height="40">
                 </a>
               </div>
@@ -36,7 +40,7 @@
                 <h3>
                   <a [routerLink]="['../../user', thread.owner.username]">
                     {{thread.owner.username}}
-                    <span class="verification" *ngIf="comment.owner.is_verified"> ** </span>
+                    <span class="verification" *ngIf="thread.owner.is_verified"> ** </span>
                   </a>
                 </h3>
                 <h5>{{thread.created_at | date: 'dd.MM.yyyy HH:mm'}}</h5>
@@ -48,6 +52,11 @@
             </div>
           </li>
         </ul>
+
+
+
+
+
 
         </div>
 

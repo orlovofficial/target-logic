@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 import { PostPageState } from '../../shared/interfaces';
 import { switchMap } from 'rxjs/operators';
 import { clear, load } from '../../reducers/postPage/post-page.action';
+import { loadToggle, pushComment } from '../../reducers/postPage/post-page.action';
 
 @Component({
   selector: 'app-post-page',
@@ -50,7 +51,7 @@ export class PostPageComponent implements OnInit {
                 created_at: new Date(node.created_at * 1000),
                 edge_threaded_comments: {
                   ...node.edge_threaded_comments,
-                  edges: node.edge_threaded_comments.edges.map(({node}) => (node))
+                  edges: node.edge_threaded_comments.edges.map(({node}) => ({...node, created_at: new Date(node.created_at * 1000)}))
                 }
               }))
             },
@@ -58,12 +59,30 @@ export class PostPageComponent implements OnInit {
           }));
         }
       );
+  }
+
+  onLoad(shortcode, {end_cursor, has_next_page}): void {
+    if (has_next_page) {
+      this.store.dispatch(loadToggle());
+      this.instagramApiService.getComments(shortcode, end_cursor).subscribe(({data}) => {
+        this.store.dispatch(pushComment({
+          edges: [
+            ...data.shortcode_media.edge_media_to_parent_comment.edges.map(({node}) => ({
+              ...node,
+              created_at: new Date(node.created_at * 1000),
+              edge_threaded_comments: {
+                ...node.edge_threaded_comments,
+                edges: node.edge_threaded_comments.edges.map(({node}) => ({...node, created_at: new Date(node.created_at * 1000)}))
+              }
 
 
-
-
-
-
+            }))
+          ],
+          page_info: data.shortcode_media.edge_media_to_parent_comment.page_info
+        }));
+        this.store.dispatch(loadToggle());
+      });
+    }
   }
 
 }

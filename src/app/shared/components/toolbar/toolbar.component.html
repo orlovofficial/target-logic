@@ -19,7 +19,7 @@
 
   <div class="load-info" *ngIf="user.isLoadNow">
     <mat-spinner diameter="18"></mat-spinner>
-    <h3>Загрузка постов <small>({{user.data.edge_owner_to_timeline_media.edges.length}} из {{user.data.edge_owner_to_timeline_media.count}})</small></h3>
+    <h3>Загрузка постов <small>({{(+user.data.edge_owner_to_timeline_media.edges.length).toLocaleString('ru-RU')}} из {{(+user.data.edge_owner_to_timeline_media.count).toLocaleString('ru-RU')}})</small></h3>
   </div>
 
   <button *ngIf="!user.isLoadNow && user.data.edge_owner_to_timeline_media.page_info.has_next_page" mat-raised-button (click)="onLoadAll(user.data.id, user.data.edge_owner_to_timeline_media.page_info)">

@@ -28,11 +28,11 @@ export class InstagramApiService {
   }
 
   getPostByShortcode(shortcode: string): Observable<any> {
-    return this.http.get<any>(`https://www.instagram.com/graphql/query/?query_hash=${QUERY_ID.post}&variables=%7B%22shortcode%22%3A%22${shortcode}%22%2C%22child_comment_count%22%3A3%2C%22fetch_comment_count%22%3A40%2C%22parent_comment_count%22%3A24%2C%22has_threaded_comments%22%3Atrue%7D`);
+    return this.http.get<any>(`https://www.instagram.com/graphql/query/?query_hash=${QUERY_ID.post}&variables=%7B%22shortcode%22%3A%22${shortcode}%22%2C%22child_comment_count%22%3A50%2C%22fetch_comment_count%22%3A50%2C%22parent_comment_count%22%3A50%2C%22has_threaded_comments%22%3Atrue%7D`);
   }
 
-  getComments(): Observable<any> {
-    return of(null);
+  getComments(shortcode: string, end_cursor: string): Observable<any> {
+    return this.http.get<any>(`https://www.instagram.com/graphql/query/?query_hash=${QUERY_ID.comments}&variables=%7B%22shortcode%22%3A%22${shortcode}%22%2C%22first%22%3A50%2C%22after%22%3A%22${end_cursor}%22%7D`);
   }
 
 }

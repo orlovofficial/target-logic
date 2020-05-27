@@ -1,8 +1,32 @@
 <ng-container *ngIf="postPage$ | async as post">
   <div *ngIf="post.data.shortcode" class="col">
+
+
+
     <div class="row">
       <div class="start space-right">
-        <img src="{{post.data.display_resources[0].src}}" width="480">
+        <ng-container *ngIf="post.data.edge_sidecar_to_children; else singleCard">
+          <div *ngFor="let card of post.data.edge_sidecar_to_children.edges">
+            <ng-container *ngIf="card.node.is_video; else image">
+              <video controls="controls" poster="{{post.data.display_url}}" preload="none" width="480">
+                <source src="{{post.data.video_url}}" type="video/mp4">
+              </video>
+            </ng-container>
+            <ng-template #image>
+              <img src="{{card.node.display_url}}" width="480">
+            </ng-template>
+          </div>
+        </ng-container>
+        <ng-template #singleCard>
+          <ng-container *ngIf="post.data.is_video; else singleImage">
+            <video controls="controls" poster="{{post.data.display_url}}" preload="none" width="480">
+              <source src="{{post.data.video_url}}" type="video/mp4">
+            </video>
+          </ng-container>
+          <ng-template #singleImage>
+            <img src="{{post.data.display_url}}" width="480">
+          </ng-template>
+        </ng-template>
       </div>
       <div class="col start">
         <div class="row">
@@ -21,7 +45,7 @@
         </div>
         <div class="space-top backaccent">
           <h4>{{post.data.taken_at_timestamp | date: 'dd.MM.yyyy HH:mm'}}</h4>
-          <p>{{post.data.edge_media_to_caption.edges[0].node.text}}</p>
+          <p>{{post.data.edge_media_to_caption.edges[0]?.node.text}}</p>
           <div class="row rating">
             <span><mat-icon>favorite</mat-icon>{{(+post.data.edge_media_preview_like.count).toLocaleString('ru-RU')}}</span>
             <span><mat-icon>chat</mat-icon>{{(+post.data.edge_media_to_parent_comment.count).toLocaleString('ru-RU')}}</span>
@@ -30,21 +54,27 @@
       </div>
     </div>
 
-    <div>
+    <div class="space-top">
 
-      <!--      <app-toolbar></app-toolbar>-->
+      <app-toolbar-comments></app-toolbar-comments>
 
       <container-element [ngSwitch]="post.viewType">
         <app-comments-list *ngSwitchCase="'comments-list'"></app-comments-list>
-        <app-editor *ngSwitchCase="'editor'"></app-editor>
-        <!--        <app-table-comments *ngSwitchDefault></app-table-comments>-->
+        <app-editor *ngSwitchCase="'editor'" [type]="'comments'"></app-editor>
+        <app-table-comments *ngSwitchDefault></app-table-comments>
       </container-element>
 
-      <!--      <button *ngIf="!post.isLoadNow && post.data.edge_media_to_parent_comment.page_info.has_next_page" mat-stroked-button class="more-button" color="primary" (click)="onLoad(user.data.id, user.data.edge_owner_to_timeline_media.page_info)">-->
-      <!--        <mat-icon>add</mat-icon>-->
-      <!--        Загрузить еще-->
-      <!--      </button>-->
+      <button *ngIf="!post.isLoadNow && post.data.edge_media_to_parent_comment.page_info.has_next_page" mat-stroked-button class="more-button" color="primary" (click)="onLoad(post.data.shortcode, post.data.edge_media_to_parent_comment.page_info)">
+        <mat-icon>add</mat-icon>
+        Загрузить еще
+      </button>
 
     </div>
+
+    <div *ngIf="post.data.comments_disabled" class="row comments-disabled">
+      <mat-icon>speaker_notes_off</mat-icon>
+      <h2>Комментарии отключены</h2>
+    </div>
+
   </div>
 </ng-container>

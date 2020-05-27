@@ -11,6 +11,15 @@ export const pushComment = createAction(
   props<{edges, page_info}>()
 );
 
+export const setViewType = createAction(
+  '[Post Page] Set View Type',
+  props<{viewType: string}>()
+);
+
 export const clear = createAction(
   '[Post Page] Clear'
+);
+
+export const loadToggle = createAction(
+  '[Post Page] Load Toggle'
 );

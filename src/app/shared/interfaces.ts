@@ -84,6 +84,9 @@ export interface Post {
   __typename?: string;
   owner?: User;
   comments_disabled?: boolean;
+  edge_sidecar_to_children?: any;
+  is_video?: boolean;
+  video_url?: string;
   edge_media_to_tagged_user?: {
     edges: any;
   };

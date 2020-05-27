@@ -1,0 +1,92 @@
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z4">
+
+
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxLabel()"
+                    color="primary">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)"
+                    [aria-label]="checkboxLabel(row)"
+                    color="primary">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+
+
+
+
+  <ng-container matColumnDef="username">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Никнейм</th>
+    <td mat-cell *matCellDef="let element">
+      <h3>
+        <a [routerLink]="['../../user', element.username]">
+          {{element.username}}
+          <span class="verification" *ngIf="element.is_verified"> ** </span>
+        </a>
+      </h3>
+    </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="owner_id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>owner_id</th>
+    <td mat-cell *matCellDef="let element">{{element.owner_id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="pic">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <a [routerLink]="['../../user', element.username]">
+        <img src="{{element.pic}}" width="30" height="30" class="img-radius">
+      </a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>id</th>
+    <td mat-cell *matCellDef="let element">{{element.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="is_verified">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>is_verified</th>
+    <td mat-cell *matCellDef="let element">{{element.is_verified}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="text">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Комментарий</th>
+    <td mat-cell *matCellDef="let element">{{element.text}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Дата</th>
+    <td mat-cell *matCellDef="let element">{{element.date | date: 'dd.MM.yyyy HH:mm:ss'}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="like">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Лайки</th>
+    <td mat-cell *matCellDef="let element">{{element.like}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="comments">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Ответы</th>
+    <td mat-cell *matCellDef="let element">{{element.comments}}</td>
+  </ng-container>
+
+
+
+
+
+
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
