@@ -33,6 +33,8 @@ import { environment } from '../environments/environment';
 import {searchReducer} from "./reducers/search/search.reducer";
 import { SearchComponent } from './shared/components/search/search.component';
 import { userPageReducer } from './reducers/userPage/user-page.reducer';
+import { postPageReducer } from './reducers/postPage/post-page.reducer';
+import { CommentsListComponent } from './shared/components/comments-list/comments-list.component';
 
 
 @NgModule({
@@ -46,7 +48,8 @@ import { userPageReducer } from './reducers/userPage/user-page.reducer';
     ToolbarComponent,
     GalleryComponent,
     EditorComponent,
-    SearchComponent
+    SearchComponent,
+    CommentsListComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,8 @@ import { userPageReducer } from './reducers/userPage/user-page.reducer';
     MatButtonToggleModule,
     StoreModule.forRoot({
       search: searchReducer,
-      userPage: userPageReducer
+      userPage: userPageReducer,
+      postPage: postPageReducer
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],

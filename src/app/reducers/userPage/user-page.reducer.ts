@@ -31,12 +31,12 @@ const _userPageReducer = createReducer(initialState,
     ...state,
     viewType
   })),
-  on(clear, (state) => ({
+  on(clear, (state: UserPageState) => ({
     ...state,
     data: {},
     isLoadNow: false
   })),
-  on(loadToggle, (state) => ({
+  on(loadToggle, (state: UserPageState) => ({
     ...state,
     isLoadNow: !state.isLoadNow
   }))

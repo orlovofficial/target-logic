@@ -16,3 +16,30 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-form-field-wrapper {
   padding-bottom: 0;
 }
+.row {
+  display: flex;
+  align-items: center;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+}
+.grow {
+  flex-grow: 1;
+}
+.space-right {
+  margin-right: 32px;
+}
+.space-top {
+  margin-top: 16px;
+}
+.start {
+  align-self: start;
+}
+.userpic {
+  border-radius: 50%;
+  margin-right: 8px;
+}
+a {
+  text-decoration: none;
+}

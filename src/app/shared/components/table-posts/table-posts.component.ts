@@ -67,7 +67,7 @@ export class TablePostsComponent implements OnInit {
         edge_media_preview_like: post.edge_media_preview_like.count,
         edge_media_to_comment: post.edge_media_to_comment.count,
         edge_media_to_caption: post.edge_media_to_caption.edges[0]?.node.text,
-        taken_at_timestamp: new Date(post.taken_at_timestamp * 1000),
+        taken_at_timestamp: new Date(+post.taken_at_timestamp * 1000),
         owner: post.owner.username,
         __typename: post.__typename.slice(5)
       })));

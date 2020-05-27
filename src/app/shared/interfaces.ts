@@ -12,11 +12,11 @@ export interface User {
   edge_follow?: any;
   edge_followed_by?: any;
   edge_owner_to_timeline_media?: {
-    edges: Post[],
-    count: number,
+    edges: Post[];
+    count: number;
     page_info: {
-      end_cursor: string,
-      has_next_page: boolean
+      end_cursor: string;
+      has_next_page: boolean;
     }
   };
   business_category_name?: string;
@@ -29,10 +29,22 @@ export interface Comment {
   id: string;
   owner: User;
   text: string;
+  edge_liked_by?: {
+    count: number
+  };
+  edge_threaded_comments: {
+    count: number;
+    edges: Comment[];
+    page_info: {
+      end_cursor: string;
+      has_next_page: boolean;
+    }
+  }
 }
 
 export interface Post {
   thumbnail_src?: string;
+  display_resources?: Array<any>;
   display_url?: string;
   location?: {
     id: string;
@@ -46,7 +58,7 @@ export interface Post {
       };
     }>;
   };
-  taken_at_timestamp?: number;
+  taken_at_timestamp?: string;
   edge_media_preview_like?: {
     count: number;
   };
@@ -61,6 +73,14 @@ export interface Post {
   video_view_count?: number;
   id?: string
   shortcode?: string;
+  edge_media_to_parent_comment?: {
+    count?: number;
+    page_info: {
+      end_cursor: string;
+      has_next_page: boolean;
+    };
+    edges: Comment[];
+  };
   __typename?: string;
   owner?: User;
   comments_disabled?: boolean;
@@ -80,11 +100,17 @@ export interface Search {
 }
 
 export interface SearchState {
-  searchList: Search[]
+  searchList: Search[];
 }
 
 export interface UserPageState {
-  data: User,
-  viewType: string,
-  isLoadNow: boolean
+  data: User;
+  viewType: string;
+  isLoadNow: boolean;
+}
+
+export interface PostPageState {
+  data: Post;
+  viewType: string;
+  isLoadNow: boolean;
 }
