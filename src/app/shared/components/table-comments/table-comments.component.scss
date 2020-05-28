@@ -25,7 +25,7 @@ a {
   word-wrap: break-word;
 }
 td.mat-cell, th.mat-header-cell {
-  padding: 8px;
+  padding: 4px;
 }
 
 /* Column Widths */
@@ -35,5 +35,8 @@ td.mat-cell, th.mat-header-cell {
 
 .mat-column-select {
   max-width: 60px;
+}
+.mat-column-text {
+  max-width: 500px;
 }
 

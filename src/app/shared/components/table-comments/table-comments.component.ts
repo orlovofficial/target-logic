@@ -13,7 +13,7 @@ import { AppState } from '../../../reducers';
 export class TableCommentsComponent implements OnInit {
 
   displayedColumns: string[] = [
-    'select',
+    // 'select',
     //'owner_id',
     'pic',
     'username',

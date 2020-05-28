@@ -1,16 +1,23 @@
 .search {
-  min-width: 300px;
-  max-width: 350px;
+  width: 412px;
   margin-left: 32px;
-  font-size: 0.95rem;
-  align-self: flex-end;
-  margin-bottom: -2px;
+  &__button {
+    width: 26px !important;
+    height: 26px !important;
+  }
+}
+.mat-form-field {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 0.7;
+}
+.mat-icon {
+  font-size: 18px;
 }
 
 .example-full-width {
   width: 100%;
 }
-
 .search-flex {
   display: flex;
   line-height: 20px;

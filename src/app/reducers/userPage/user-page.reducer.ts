@@ -4,7 +4,7 @@ import { clear, load, loadToggle, pushPost, setViewType } from './user-page.acti
 
 export const initialState: UserPageState = {
   data: {},
-  viewType: 'table-posts',
+  viewType: 'gallery',
   isLoadNow: false
 }
 

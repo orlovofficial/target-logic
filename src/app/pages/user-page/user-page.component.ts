@@ -7,6 +7,7 @@ import { UserPageState } from '../../shared/interfaces';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
 import { clear, load, loadToggle, pushPost } from '../../reducers/userPage/user-page.action';
+import { clearSearch } from '../../reducers/search/search.action';
 
 @Component({
   selector: 'app-user-page',
@@ -31,6 +32,7 @@ export class UserPageComponent implements OnInit {
       .pipe(
         switchMap((params: Params) => {
           if (params['id']) {
+
             this.store.dispatch(clear());
             return this.instagramApiService.getUserByUsername(params['id']);
           }
@@ -39,6 +41,7 @@ export class UserPageComponent implements OnInit {
       )
       .subscribe(
         user => {
+          this.store.dispatch(clearSearch());
           this.store.dispatch(load({
             ...user.graphql.user,
             edge_owner_to_timeline_media: {

@@ -13,7 +13,7 @@ import { AppState } from '../../../reducers';
 export class TablePostsComponent implements OnInit {
 
   displayedColumns: string[] = [
-    'select',
+    // 'select',
     'thumbnail_src',
     'location',
     'edge_media_to_caption',

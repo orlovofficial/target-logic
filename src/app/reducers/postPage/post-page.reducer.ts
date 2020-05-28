@@ -1,6 +1,6 @@
 import { Post, PostPageState } from '../../shared/interfaces';
 import { createReducer, on } from '@ngrx/store';
-import { load, pushComment, clear, loadToggle, setViewType } from './post-page.action';
+import { load, pushComment, clear, loadToggle, setViewType, pushThread } from './post-page.action';
 
 export const initialState: PostPageState = {
   data: {},
@@ -24,6 +24,23 @@ export const _postPageReducer = createReducer(initialState,
           ...edges
         ],
         page_info: page_info
+      }
+    }
+  })),
+  on(pushThread, (state: PostPageState, {comment_id, thread}) => ({
+    ...state,
+    data: {
+      ...state.data,
+      edge_media_to_parent_comment: {
+        ...state.data.edge_media_to_parent_comment,
+        edges: state.data.edge_media_to_parent_comment.edges.map((comment) => (comment.id === comment_id ? {
+          ...comment,
+          edge_threaded_comments: {
+            ...comment.edge_threaded_comments,
+            page_info: thread.page_info,
+            edges: [...thread.edges, ...comment.edge_threaded_comments.edges]
+          }
+        } : comment))
       }
     }
   })),

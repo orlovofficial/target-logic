@@ -7,8 +7,13 @@ export const load = createAction(
 );
 
 export const pushComment = createAction(
-  '[Post Page] Push comment',
+  '[Post Page] Push Comment',
   props<{edges, page_info}>()
+);
+
+export const pushThread = createAction(
+  '[Post Page] Push Thread',
+  props<{comment_id, thread: {edges, page_info}}>()
 );
 
 export const setViewType = createAction(

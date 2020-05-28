@@ -1,6 +1,7 @@
 ul {
   list-style-type: none;
   padding: 0;
+  margin-bottom: 0;
 }
 h3 {
   margin-bottom: 0;
@@ -36,4 +37,9 @@ h5 {
   background-image: url("/assets/verification_small.png");
   font-size: 0.9rem;
   margin-left: 2px;
+}
+.more-thread-button {
+  margin-left: 46px;
+  margin-top: 16px;
+  width: 150px;
 }

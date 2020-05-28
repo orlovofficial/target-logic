@@ -35,4 +35,7 @@ export class InstagramApiService {
     return this.http.get<any>(`https://www.instagram.com/graphql/query/?query_hash=${QUERY_ID.comments}&variables=%7B%22shortcode%22%3A%22${shortcode}%22%2C%22first%22%3A50%2C%22after%22%3A%22${end_cursor}%22%7D`);
   }
 
+  getThread(comment_id: string, end_cursor: string): Observable<any> {
+    return this.http.get<any>(`https://www.instagram.com/graphql/query/?query_hash=${QUERY_ID.thread}&variables=%7B%22comment_id%22%3A%22${comment_id}%22%2C%22first%22%3A50%2C%22after%22%3A%22${end_cursor}%22%7D`);
+  }
 }

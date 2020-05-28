@@ -5,4 +5,4 @@ export const load = createAction(
   '[Search] Load',
   props<{result: Search[]}>()
 );
-export const clear = createAction('[Search] Clear');
+export const clearSearch = createAction('[Search] Clear');

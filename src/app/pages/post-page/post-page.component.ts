@@ -22,11 +22,11 @@ export class PostPageComponent implements OnInit {
     private route: ActivatedRoute,
     private instagramApiService: InstagramApiService,
     private store: Store<AppState>
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.postPage$ = this.store.select('postPage');
-
 
 
     this.route.params
@@ -51,9 +51,12 @@ export class PostPageComponent implements OnInit {
                 created_at: new Date(node.created_at * 1000),
                 edge_threaded_comments: {
                   ...node.edge_threaded_comments,
-                  edges: node.edge_threaded_comments.edges.map(({node}) => ({...node, created_at: new Date(node.created_at * 1000)}))
+                  edges: node.edge_threaded_comments.edges.map(({node}) => ({
+                    ...node,
+                    created_at: new Date(node.created_at * 1000)
+                  }))
                 }
-              }))
+              })).reverse()
             },
 
           }));
@@ -66,18 +69,19 @@ export class PostPageComponent implements OnInit {
       this.store.dispatch(loadToggle());
       this.instagramApiService.getComments(shortcode, end_cursor).subscribe(({data}) => {
         this.store.dispatch(pushComment({
-          edges: [
-            ...data.shortcode_media.edge_media_to_parent_comment.edges.map(({node}) => ({
-              ...node,
-              created_at: new Date(node.created_at * 1000),
-              edge_threaded_comments: {
-                ...node.edge_threaded_comments,
-                edges: node.edge_threaded_comments.edges.map(({node}) => ({...node, created_at: new Date(node.created_at * 1000)}))
-              }
+          edges: data.shortcode_media.edge_media_to_parent_comment.edges.map(({node}) => ({
+            ...node,
+            created_at: new Date(node.created_at * 1000),
+            edge_threaded_comments: {
+              ...node.edge_threaded_comments,
+              edges: node.edge_threaded_comments.edges.map(({node}) => ({
+                ...node,
+                created_at: new Date(node.created_at * 1000)
+              }))
+            }
 
 
-            }))
-          ],
+          })).reverse(),
           page_info: data.shortcode_media.edge_media_to_parent_comment.page_info
         }));
         this.store.dispatch(loadToggle());

@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { clear, load } from './search.action';
+import { clearSearch, load } from './search.action';
 import { Search, SearchState } from '../../shared/interfaces';
 
 export const initialState: SearchState = {
@@ -11,7 +11,7 @@ const _searchReducer = createReducer(initialState,
     searchList: [...result]
       .sort((a: Search, b: Search) => a.position > b.position ? 1 : -1)
   })),
-  on(clear, state => ({searchList: []}))
+  on(clearSearch, state => ({searchList: []}))
 );
 
 export function searchReducer(state, action) {

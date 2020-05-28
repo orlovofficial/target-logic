@@ -8,54 +8,61 @@
           </a>
         </div>
         <div class="col">
-        <div class="col backlight">
-          <h3>
-            <a [routerLink]="['../../user', comment.owner.username]">
-              {{comment.owner.username}}
-              <span class="verification" *ngIf="comment.owner.is_verified"> ** </span>
-            </a>
-          </h3>
-          <h5>{{comment.created_at | date: 'dd.MM.yyyy HH:mm'}}</h5>
-          <p>{{comment.text}}</p>
-          <div class="row rating">
-            <h3><mat-icon>favorite</mat-icon>{{(+comment.edge_liked_by.count).toLocaleString('ru-RU')}}</h3>
-            <h3><mat-icon>chat</mat-icon>{{(+comment.edge_threaded_comments.count).toLocaleString('ru-RU')}}</h3>
+          <div class="col backlight">
+            <h3>
+              <a [routerLink]="['../../user', comment.owner.username]">
+                {{comment.owner.username}}
+                <span class="verification" *ngIf="comment.owner.is_verified"> ** </span>
+              </a>
+            </h3>
+            <h5>{{comment.created_at | date: 'dd.MM.yyyy HH:mm'}}</h5>
+            <p>{{comment.text}}</p>
+            <div class="row rating">
+              <h3>
+                <mat-icon>favorite</mat-icon>
+                {{(+comment.edge_liked_by.count).toLocaleString('ru-RU')}}</h3>
+              <h3>
+                <mat-icon>chat</mat-icon>
+                {{(+comment.edge_threaded_comments.count).toLocaleString('ru-RU')}}</h3>
+            </div>
           </div>
-        </div>
 
 
+          <button *ngIf="comment.edge_threaded_comments.page_info.has_next_page"
+                  mat-stroked-button
+                  class="more-thread-button"
+                  color="primary"
+                  (click)="onThread(comment.id, comment.edge_threaded_comments.page_info)">
+            <mat-icon>add</mat-icon>
+            Загрузить еще
+          </button>
 
-
-
-
-        <ul *ngIf="comment.edge_threaded_comments.count">
-          <li *ngFor="let thread of comment.edge_threaded_comments.edges">
-            <div class="row space-top">
-              <div class="start">
-                <a [routerLink]="['../../user', thread.owner.username]">
-                  <img src="{{thread.owner.profile_pic_url}}" class="userpic" width="40" height="40">
-                </a>
-              </div>
-              <div class="col backlight">
-                <h3>
+          <ul *ngIf="comment.edge_threaded_comments.count">
+            <li *ngFor="let thread of comment.edge_threaded_comments.edges">
+              <div class="row space-top">
+                <div class="start">
                   <a [routerLink]="['../../user', thread.owner.username]">
-                    {{thread.owner.username}}
-                    <span class="verification" *ngIf="thread.owner.is_verified"> ** </span>
+                    <img src="{{thread.owner.profile_pic_url}}" class="userpic" width="40" height="40">
                   </a>
-                </h3>
-                <h5>{{thread.created_at | date: 'dd.MM.yyyy HH:mm'}}</h5>
-                <p>{{thread.text}}</p>
-                <div class="row rating">
-                  <h3><mat-icon>favorite</mat-icon>{{(+thread.edge_liked_by.count).toLocaleString('ru-RU')}}</h3>
+                </div>
+                <div class="col backlight">
+                  <h3>
+                    <a [routerLink]="['../../user', thread.owner.username]">
+                      {{thread.owner.username}}
+                      <span class="verification" *ngIf="thread.owner.is_verified"> ** </span>
+                    </a>
+                  </h3>
+                  <h5>{{thread.created_at | date: 'dd.MM.yyyy HH:mm'}}</h5>
+                  <p>{{thread.text}}</p>
+                  <div class="row rating">
+                    <h3>
+                      <mat-icon>favorite</mat-icon>
+                      {{(+thread.edge_liked_by.count).toLocaleString('ru-RU')}}</h3>
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
-        </ul>
-
-
-
-
+            </li>
+          </ul>
 
 
         </div>

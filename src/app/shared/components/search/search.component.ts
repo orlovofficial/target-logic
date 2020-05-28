@@ -4,7 +4,7 @@ import { Search, SearchState } from '../../interfaces';
 import { InstagramApiService } from '../../services/instagram-api.service';
 import { debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { load, clear } from '../../../reducers/search/search.action';
+import { load, clearSearch } from '../../../reducers/search/search.action';
 import { AppState } from '../../../reducers';
 
 @Component({
@@ -30,7 +30,8 @@ export class SearchComponent implements OnInit {
         filter(value => value !== undefined),
         filter(v => {
           const isSearch = v?.trim().length !== 0;
-          if (!isSearch) this.store.dispatch(clear());
+
+          if (!isSearch) this.store.dispatch(clearSearch());
           return isSearch;
         }),
         switchMap(() => {
@@ -69,7 +70,7 @@ export class SearchComponent implements OnInit {
 
   onClick() {
     this.searchCtrl = '';
-    this.store.dispatch(clear());
+    this.store.dispatch(clearSearch());
   }
 
   handleChange(event) {
