@@ -37,6 +37,8 @@ import { userPageReducer } from './reducers/userPage/user-page.reducer';
 import { postPageReducer } from './reducers/postPage/post-page.reducer';
 import { CommentsListComponent } from './shared/components/comments-list/comments-list.component';
 import { ToolbarCommentsComponent } from './shared/components/toolbar-comments/toolbar-comments.component';
+import { WidgetUserComponent } from './shared/components/widget/widget-user/widget-user.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -53,7 +55,8 @@ import { ToolbarCommentsComponent } from './shared/components/toolbar-comments/t
     EditorComponent,
     SearchComponent,
     CommentsListComponent,
-    ToolbarCommentsComponent
+    ToolbarCommentsComponent,
+    WidgetUserComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +77,7 @@ import { ToolbarCommentsComponent } from './shared/components/toolbar-comments/t
     MatSortModule,
     MatCheckboxModule,
     MatButtonToggleModule,
+    MatTooltipModule,
     StoreModule.forRoot({
       search: searchReducer,
       userPage: userPageReducer,

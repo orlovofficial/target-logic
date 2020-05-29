@@ -21,8 +21,19 @@ export class SearchComponent implements OnInit {
   constructor(
     private instagramApiService: InstagramApiService,
     private store: Store<AppState>
-  ) {
-    this.search$ = store.select('search');
+  ) { }
+
+  onClick() {
+    this.searchCtrl = '';
+    this.store.dispatch(clearSearch());
+  }
+
+  handleChange(event) {
+    this.searchInput.next(event);
+  }
+
+  ngOnInit(): void {
+    this.search$ = this.store.select('search');
     this.searchInput
       .pipe(
         debounceTime(500),
@@ -63,21 +74,9 @@ export class SearchComponent implements OnInit {
             position: position
           }))
         ];
-        store.dispatch(load({result: newSearch}));
+        this.store.dispatch(load({result: newSearch}));
 
       });
-  }
-
-  onClick() {
-    this.searchCtrl = '';
-    this.store.dispatch(clearSearch());
-  }
-
-  handleChange(event) {
-    this.searchInput.next(event);
-  }
-
-  ngOnInit(): void {
   }
 
 }

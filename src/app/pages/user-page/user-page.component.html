@@ -1,6 +1,6 @@
 <div *ngIf="userPage$ | async as user">
-  <div class="user-info flex-row" *ngIf="user.data?.username">
-    <div class="flex-col">
+  <div class="user-info row-center" *ngIf="user.data?.username">
+    <div class="col start">
       <img src="{{user.data.profile_pic_url}}" height="150" width="150">
     </div>
     <div class=" item2">
@@ -13,20 +13,23 @@
         <a href="{{user.data.external_url}}">{{user.data.external_url}}</a>
       </p>
     </div>
-    <div class="flex-col">
+    <div class="user-pff col space-right start">
       <div>
-        <h4>публикаций</h4>
         <h1>{{(+user.data.edge_owner_to_timeline_media?.count).toLocaleString('ru-RU')}}</h1>
+        <span>публикаций</span>
       </div>
-      <div>
-        <h4>подписчиков</h4>
+      <div class="space-top">
         <h1>{{(+user.data.edge_followed_by?.count).toLocaleString('ru-RU')}}</h1>
+        <span>подписчиков</span>
       </div>
-      <div>
-        <h4>подписок</h4>
+      <div class="space-top">
         <h1>{{(+user.data.edge_follow?.count).toLocaleString('ru-RU')}}</h1>
+        <span>подписок</span>
       </div>
     </div>
+
+    <app-widget-user class="start"></app-widget-user>
+
   </div>
 
 
@@ -45,12 +48,12 @@
     </button>
   </div>
 
-  <div class="user-media flex-row" *ngIf="user.data?.is_private">
+  <div class="user-media row-center" *ngIf="user.data?.is_private">
     <mat-icon>lock</mat-icon>
     <h2>Это закрытый аккаунт</h2>
   </div>
 
-  <div class="user-media flex-row" *ngIf="!user.data?.username">
+  <div class="user-media row-center" *ngIf="!user.data?.username">
     <mat-spinner diameter="32"></mat-spinner>
   </div>
 

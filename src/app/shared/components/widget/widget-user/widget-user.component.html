@@ -1,0 +1,21 @@
+<div class="row widget-user">
+  <div class="col-center space-right">
+    <mat-icon>favorite</mat-icon>
+    <h2>{{(analytics.allLikes / analytics.posts).toLocaleString('ru-RU', {maximumFractionDigits: 0})}} <span class="rate" matTooltip="Процент от общего числа подписчиков" matTooltipPosition="right">{{((analytics.allLikes / analytics.posts * 100) / analytics.followers).toLocaleString('ru-RU', {maximumFractionDigits: 2})}}%</span></h2>
+    <span>в среднем за пост</span>
+    <h3>{{(+analytics.allLikes).toLocaleString('ru-RU')}}</h3>
+    <span>лайков всего</span>
+  </div>
+  <div class="col-center space-right">
+    <mat-icon>chat</mat-icon>
+    <h2>{{(analytics.allComments / analytics.posts).toLocaleString('ru-RU', {maximumFractionDigits: 0})}} <span class="rate" matTooltip="Процент от общего числа подписчиков" matTooltipPosition="right">{{((analytics.allComments / analytics.posts * 100) / analytics.followers).toLocaleString('ru-RU', {maximumFractionDigits: 2})}}%</span></h2>
+    <span>в среднем за пост</span>
+    <h3>{{(+analytics.allComments).toLocaleString('ru-RU')}}</h3>
+    <span>комментариев всего</span>
+  </div>
+  <div class="col-center space-right start">
+    <mat-icon>visibility</mat-icon>
+    <h2>{{(analytics.allViews / analytics.video).toLocaleString('ru-RU', {maximumFractionDigits: 0})}} <span class="rate" matTooltip="Процент от общего числа подписчиков" matTooltipPosition="right">{{((analytics.allViews / analytics.video * 100) / analytics.followers).toLocaleString('ru-RU', {maximumFractionDigits: 2})}}%</span></h2>
+    <span>в среднем на видео</span>
+  </div>
+</div>
