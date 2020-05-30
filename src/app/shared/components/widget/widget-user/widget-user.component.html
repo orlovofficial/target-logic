@@ -1,5 +1,5 @@
 <div class="row widget-user" *ngIf="analytics.posts > 0">
-  <div class="col-center space-right">
+  <div class="col-center start space-right">
     <mat-icon>favorite</mat-icon>
     <h2>{{(analytics.allLikes / analytics.posts).toLocaleString('ru-RU', {maximumFractionDigits: 0})}} <span
       *ngIf="analytics.followers > 0" class="rate" matTooltip="Процент от общего числа подписчиков"
@@ -9,7 +9,7 @@
     <h3>{{(+analytics.allLikes).toLocaleString('ru-RU')}}</h3>
     <span>лайков всего</span>
   </div>
-  <div class="col-center space-right">
+  <div class="col-center start space-right">
     <mat-icon>chat</mat-icon>
     <h2>{{(analytics.allComments / analytics.posts).toLocaleString('ru-RU', {maximumFractionDigits: 0})}} <span
       *ngIf="analytics.followers > 0" class="rate" matTooltip="Процент от общего числа подписчиков"
@@ -41,5 +41,14 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="col">
+    <canvas baseChart
+            [datasets]="chartData"
+            [labels]="chartLabels"
+            [options]="chartOptions"
+            [legend]="chartLegend"
+            [chartType]="chartType"></canvas>
+
   </div>
 </div>

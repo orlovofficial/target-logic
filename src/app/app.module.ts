@@ -39,6 +39,7 @@ import { CommentsListComponent } from './shared/components/comments-list/comment
 import { ToolbarCommentsComponent } from './shared/components/toolbar-comments/toolbar-comments.component';
 import { WidgetUserComponent } from './shared/components/widget/widget-user/widget-user.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatCheckboxModule,
     MatButtonToggleModule,
     MatTooltipModule,
+    ChartsModule,
     StoreModule.forRoot({
       search: searchReducer,
       userPage: userPageReducer,
