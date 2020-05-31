@@ -37,12 +37,13 @@ import { userPageReducer } from './reducers/userPage/user-page.reducer';
 import { postPageReducer } from './reducers/postPage/post-page.reducer';
 import { CommentsListComponent } from './shared/components/comments-list/comments-list.component';
 import { ToolbarCommentsComponent } from './shared/components/toolbar-comments/toolbar-comments.component';
-import { WidgetUserComponent } from './shared/components/widget/widget-user/widget-user.component';
+import { WidgetUserComponent } from './shared/components/widgets/widget-user/widget-user.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ChartsModule } from 'ng2-charts';
 import { TagPageComponent } from './pages/tag-page/tag-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { LocationPageComponent } from './pages/location-page/location-page.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 @NgModule({
@@ -86,6 +87,7 @@ import { LocationPageComponent } from './pages/location-page/location-page.compo
     MatButtonToggleModule,
     MatTooltipModule,
     ChartsModule,
+    // GoogleMapsModule,
     StoreModule.forRoot({
       search: searchReducer,
       userPage: userPageReducer,

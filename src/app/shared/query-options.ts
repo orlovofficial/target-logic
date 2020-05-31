@@ -6,3 +6,5 @@ export const QUERY_ID = {
   tag: '7dabc71d3e758b1ec19ffb85639e427b',
   location: '36bd0f2bf5911908de389b8ceaa3be6d'
 };
+
+export const FIRST = 48;

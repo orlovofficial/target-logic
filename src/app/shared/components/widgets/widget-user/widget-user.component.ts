@@ -24,6 +24,9 @@ export class WidgetUserComponent implements OnInit {
   public chartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
+    animation: {
+      duration: 0
+    },
     elements: {
       point:{
         radius: 0
@@ -49,8 +52,7 @@ export class WidgetUserComponent implements OnInit {
       } ]
     },
     tooltips: {
-      mode: 'index',
-      intersect: false
+      enabled: false
     }
   };
 

@@ -26,6 +26,8 @@
     <td mat-cell *matCellDef="let element">
       <a [routerLink]="['../../post', element.shortcode]">
         <div class="cover">
+          <mat-icon *ngIf="element.__typename === 'Video'" class="post-type">videocam</mat-icon>
+          <mat-icon *ngIf="element.__typename === 'Sidecar'" class="post-type">view_carousel</mat-icon>
           <img src={{element.thumbnail_resources[0].src}} width="75">
         </div>
       </a>

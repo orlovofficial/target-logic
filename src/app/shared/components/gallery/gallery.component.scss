@@ -24,7 +24,7 @@
     width: calc(8.33% - 12px);
     height: calc(8.33vw - 12px);
     border-radius: 8px;
-    padding: 12px 12px;
+    padding: 6px 12px 12px 12px;
     box-sizing: border-box;
     background: rgba(0, 0, 0, 0.0);
     color: transparent;
@@ -46,19 +46,23 @@
   &__cover:hover {
     background: rgba(0, 0, 0, 0.7);
     color: #ffffff;
-    padding: 6px 12px;
+    padding: 6px 12px 6px 12px;
   }
+}
+.post-type {
+  color: #FFFFFF;
+  margin: 0 0 -40px -2px;
 }
 
 @media screen and (max-width: 1400px) {
   .gallery {
     &__item {
-      width: calc(12.5% - 10px);
-      height: calc(12.5vw - 13px);
+      width: calc(16.66% - 10px);
+      height: calc(16.66vw - 13px);
     }
     &__cover {
-      width: calc(12.5% - 12px);
-      height: calc(12.5vw - 12px);
+      width: calc(16.66% - 12px);
+      height: calc(16.66vw - 12px);
     }
   }
 }

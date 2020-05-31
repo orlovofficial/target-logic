@@ -9,6 +9,13 @@
   display: flex;
   align-items: center;
 }
+.post-type {
+  position: absolute;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  margin: 4px;
+  align-self: start;
+}
 .wrap-word {
   word-wrap: break-word;
 }
