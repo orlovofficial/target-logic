@@ -40,7 +40,9 @@
                 <span class="verification" *ngIf="post.data.owner.is_verified"> ** </span>
               </a>
             </h1>
-            <h4 *ngIf="post.data.location">{{post.data?.location.name}}</h4>
+            <h4 *ngIf="post.data.location">
+              <a [routerLink]="['../../locations', post.data.location.id]">{{post.data?.location.name}}</a>
+            </h4>
           </div>
         </div>
         <div class="space-top backaccent">

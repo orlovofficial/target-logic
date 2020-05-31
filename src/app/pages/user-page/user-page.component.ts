@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { switchMap, takeWhile } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { catchError, switchMap, takeWhile } from 'rxjs/operators';
+import { EMPTY, Observable, of } from 'rxjs';
 import { InstagramApiService } from '../../shared/services/instagram-api.service';
 import { UserPageState } from '../../shared/interfaces';
 import { Store } from '@ngrx/store';
@@ -20,6 +20,7 @@ export class UserPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private instagramApiService: InstagramApiService,
     private store: Store<AppState>
   ) {
@@ -40,7 +41,15 @@ export class UserPageComponent implements OnInit {
             this.store.dispatch(clear());
             return this.instagramApiService.getUserByUsername(params['id']);
           }
-          return of(null);
+          return EMPTY;
+        })
+      )
+      .pipe(
+        catchError(err => {
+          if (err.status === 404) {
+            this.router.navigate(['/error']);
+          };
+          return EMPTY;
         })
       )
       .subscribe(

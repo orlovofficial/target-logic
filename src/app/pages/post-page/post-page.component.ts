@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { InstagramApiService } from '../../shared/services/instagram-api.service';
 import { AppState } from '../../reducers';
 import { Store } from '@ngrx/store';
@@ -20,6 +20,7 @@ export class PostPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private instagramApiService: InstagramApiService,
     private store: Store<AppState>
   ) {
@@ -41,25 +42,30 @@ export class PostPageComponent implements OnInit {
       )
       .subscribe(
         post => {
-          this.store.dispatch(load({
-            ...post.data.shortcode_media,
-            taken_at_timestamp: new Date(post.data.shortcode_media.taken_at_timestamp * 1000),
-            edge_media_to_parent_comment: {
-              ...post.data.shortcode_media.edge_media_to_parent_comment,
-              edges: post.data.shortcode_media.edge_media_to_parent_comment.edges.map(({node}) => ({
-                ...node,
-                created_at: new Date(node.created_at * 1000),
-                edge_threaded_comments: {
-                  ...node.edge_threaded_comments,
-                  edges: node.edge_threaded_comments.edges.map(({node}) => ({
-                    ...node,
-                    created_at: new Date(node.created_at * 1000)
-                  }))
-                }
-              })).reverse()
-            },
+          if (post.data.shortcode_media === null) {
+            this.router.navigate(['/error']);
+          } else {
 
-          }));
+            this.store.dispatch(load({
+              ...post.data.shortcode_media,
+              taken_at_timestamp: new Date(post.data.shortcode_media.taken_at_timestamp * 1000),
+              edge_media_to_parent_comment: {
+                ...post.data.shortcode_media.edge_media_to_parent_comment,
+                edges: post.data.shortcode_media.edge_media_to_parent_comment.edges.map(({node}) => ({
+                  ...node,
+                  created_at: new Date(node.created_at * 1000),
+                  edge_threaded_comments: {
+                    ...node.edge_threaded_comments,
+                    edges: node.edge_threaded_comments.edges.map(({node}) => ({
+                      ...node,
+                      created_at: new Date(node.created_at * 1000)
+                    }))
+                  }
+                })).reverse()
+              },
+
+            }));
+          }
         }
       );
   }

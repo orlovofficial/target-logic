@@ -6,6 +6,7 @@ import { PostPageComponent } from "./pages/post-page/post-page.component";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
 import { TagPageComponent } from './pages/tag-page/tag-page.component';
 import { LocationPageComponent } from './pages/location-page/location-page.component';
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'tags/:id', component: TagPageComponent },
       { path: 'locations/:id/:slug', component: LocationPageComponent },
       { path: 'locations/:id', component: LocationPageComponent },
+      { path: 'error', component: ErrorPageComponent },
       { path: '**', redirectTo: '', pathMatch: 'full' }
     ]
   }

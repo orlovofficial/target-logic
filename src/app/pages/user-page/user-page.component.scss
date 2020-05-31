@@ -17,10 +17,12 @@
   color: #999999;
   font-size: 12px;
   margin-left: 32px;
+  min-width: 130px;
+  justify-content: space-between;
   h1 {
     color: #000000;
     font-weight: 400;
-    font-size: 28px;
+    font-size: 22px;
     margin: 0px 0 -4px 0;
   }
 }

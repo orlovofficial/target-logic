@@ -71,7 +71,7 @@ export class SearchComponent implements OnInit {
           ...res.places.map(({place, position}) => ({
             img: '/assets/location.png',
             name: place.location.name,
-            href: `/locations/${place.location.pk}/${place.slug}`,
+            href: `/locations/${place.location.pk}`,
             title: '',
             position: position
           }))

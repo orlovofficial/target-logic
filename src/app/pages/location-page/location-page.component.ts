@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { UserPageState } from '../../shared/interfaces';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { InstagramApiService } from '../../shared/services/instagram-api.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../reducers';
-import { switchMap } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 import { clear, loadPlace, loadTag, loadToggle, pushPost } from '../../reducers/userPage/user-page.action';
 import { clearSearch } from '../../reducers/search/search.action';
 
@@ -21,6 +21,7 @@ export class LocationPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private instagramApiService: InstagramApiService,
     private store: Store<AppState>
   ) {
@@ -42,6 +43,14 @@ export class LocationPageComponent implements OnInit {
             return this.instagramApiService.getLocation(params['id'], params['slug']);
           }
           return of(null);
+        })
+      )
+      .pipe(
+        catchError(err => {
+          if (err.status === 404) {
+            this.router.navigate(['/error']);
+          };
+          return EMPTY;
         })
       )
       .subscribe(
