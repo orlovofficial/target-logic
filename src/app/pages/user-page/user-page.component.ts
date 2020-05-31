@@ -15,7 +15,7 @@ import { clearSearch } from '../../reducers/search/search.action';
   styleUrls: ['./user-page.component.scss']
 })
 export class UserPageComponent implements OnInit {
-
+  username: string = '';
   userPage$: Observable<UserPageState>;
 
   constructor(
@@ -31,7 +31,11 @@ export class UserPageComponent implements OnInit {
     this.route.params
       .pipe(
         switchMap((params: Params) => {
-          if (params['id']) {
+
+
+          this.store.select('userPage').subscribe((user) => {this.username = user.data.username;})
+
+          if (params['id'] !== this.username) {
 
             this.store.dispatch(clear());
             return this.instagramApiService.getUserByUsername(params['id']);

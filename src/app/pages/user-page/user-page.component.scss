@@ -7,7 +7,8 @@
 }
 
 .user-info {
-  min-height: 190px;
+  align-items: flex-start;
+  min-width: 900px;
   img {
     border-radius: 50%;
   }
@@ -24,11 +25,9 @@
   }
 }
 .item2 {
-  margin-left: 16px;
-  min-width: 400px;
-  flex-basis: 550px;
-  padding-right: 64px;
+  flex-basis: 850px;
   align-self: flex-start;
+  min-width: 500px;
 }
 
 .more-button {

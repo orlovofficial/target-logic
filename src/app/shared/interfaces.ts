@@ -102,12 +102,76 @@ export interface Search {
   is_verified?: boolean;
 }
 
+export interface Tag {
+  description?: string;
+  edge_hashtag_to_media?: {
+    count: number;
+    edges: Post[];
+    page_info: {
+      end_cursor: string;
+      has_next_page: boolean;
+    };
+  };
+  edge_hashtag_to_related_tags?: {
+    edges: any;
+  };
+  edge_hashtag_to_top_posts?: {
+    edges: Post[];
+  };
+  id?: string;
+  name?: string;
+  profile_pic_url?: string;
+}
+
+export interface Place {
+  address_json?: string;
+  blurb?: string;
+  directory?: {
+    city: {
+      id: string;
+      name: string;
+      slug: string;
+    };
+    country: {
+      id: string;
+      name: string;
+      slug: string;
+    };
+  };
+  edge_location_to_media?: {
+    count: number;
+    edges: Post[];
+    page_info: {
+      end_cursor: string;
+      has_next_page: boolean;
+    };
+  };
+  edge_location_to_top_posts?: {
+    count: number;
+    edges: Post[];
+    page_info: {
+      end_cursor: string;
+      has_next_page: boolean;
+    };
+  };
+  id?: string;
+  lat?: number;
+  lng?: number;
+  name?: string;
+  phone?: string;
+  profile_pic_url?: string;
+  slug?: string;
+  website?: string;
+}
+
 export interface SearchState {
   searchList: Search[];
 }
 
 export interface UserPageState {
   data: User;
+  hashtag: Tag;
+  location: Place;
   viewType: string;
   isLoadNow: boolean;
 }

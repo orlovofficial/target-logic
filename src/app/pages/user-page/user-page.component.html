@@ -1,9 +1,11 @@
 <div *ngIf="userPage$ | async as user">
   <div class="user-info row-center" *ngIf="user.data?.username">
-    <div class="col start">
+
+    <div class="row item2">
+    <div class="col space-right start">
       <img src="{{user.data.profile_pic_url}}" height="150" width="150">
     </div>
-    <div class=" item2">
+    <div class="start">
       <h1>{{user.data.username}}<span class="verification" *ngIf="user.data.is_verified"> ** </span></h1>
       <h5>ID {{user.data.id}}</h5>
       <h2>{{user.data.full_name}}</h2>
@@ -13,6 +15,8 @@
         <a href="{{user.data.external_url}}">{{user.data.external_url}}</a>
       </p>
     </div>
+    </div>
+
     <div class="user-pff col space-right start">
       <div>
         <h1>{{(+user.data.edge_owner_to_timeline_media?.count).toLocaleString('ru-RU')}}</h1>

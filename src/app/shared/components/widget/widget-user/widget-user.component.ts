@@ -47,6 +47,10 @@ export class WidgetUserComponent implements OnInit {
           display: false
         }
       } ]
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false
     }
   };
 
@@ -79,13 +83,21 @@ export class WidgetUserComponent implements OnInit {
         label: 'Лайки',
         borderColor: 'rgb(63, 81, 181)',
         backgroundColor: 'rgba(63, 81, 181, 0.1)',
-        borderWidth: 1
+        borderWidth: 1,
+        pointHoverBorderColor: 'rgb(63, 81, 181)',
+        pointHoverBackgroundColor:'rgb(255, 255, 255)',
+        pointBorderColor: 'rgb(63, 81, 181)',
+        pointBackgroundColor:'rgb(63, 81, 181)'
       },{
         data: [],
         label: 'Комментарии',
-        borderColor: 'rgb(31,173,87)',
-        backgroundColor: 'rgba(31, 173, 87, 0.1)',
-        borderWidth: 1
+        borderColor: 'rgb(31, 173, 87)',
+        backgroundColor: 'rgba(31, 173, 87, 0.2)',
+        borderWidth: 1,
+        pointHoverBorderColor: 'rgb(31, 173, 87)',
+        pointHoverBackgroundColor:'rgb(255, 255, 255)',
+        pointBorderColor: 'rgb(31, 173, 87)',
+        pointBackgroundColor:'rgb(31, 173, 87)'
       }];
 
       this.analytics = data.edge_owner_to_timeline_media.edges.reduce((result: Analytics, post: Post) => {
@@ -111,6 +123,38 @@ export class WidgetUserComponent implements OnInit {
           postsMonth: day < 30 ? result.postsMonth + 1 : result.postsMonth
         };
       }, newanalytics);
+
+
+
+
+      for (let i = 0; i < this.chartData[0].data.length - 1; i++) {
+        this.chartData[0].data[i] = (this.chartData[0].data[i] + this.chartData[0].data[i + 1]) / 2;
+        this.chartData[1].data[i] = (this.chartData[1].data[i] + this.chartData[1].data[i + 1]) / 2;
+      }
+
+      for (let i = 0; i < this.chartData[0].data.length - 2; i++) {
+        this.chartData[0].data[i] = (this.chartData[0].data[i] + this.chartData[0].data[i + 1] + this.chartData[0].data[i + 2]) / 3;
+        this.chartData[1].data[i] = (this.chartData[1].data[i] + this.chartData[1].data[i + 1] + this.chartData[1].data[i + 2]) / 3;
+      }
+
+      if (this.chartData[0].data.length > 200) {
+        let iter = 0;
+        this.chartData[0].data = this.chartData[0].data.filter((item) => {
+          ++iter;
+          return iter % 4 === 0;
+        });
+        iter = 0;
+        this.chartData[1].data = this.chartData[1].data.filter((item) => {
+          ++iter;
+          return iter % 4 === 0;
+        });
+        iter = 0;
+        this.chartLabels = this.chartLabels.filter((item) => {
+          ++iter;
+          return iter % 4 === 0;
+        });
+      }
+
     });
   }
 

@@ -63,13 +63,15 @@ export class SearchComponent implements OnInit {
           ...res.hashtags.map(({hashtag, position}) => ({
             img: '/assets/tag.png',
             name: `#${hashtag.name}`,
-            title: `${hashtag.media_count} публикаций`,
+            href: `/tags/${hashtag.name}`,
+            title: `${(+hashtag.media_count).toLocaleString('ru-RU')} публикаций`,
             position: position
           })),
 
           ...res.places.map(({place, position}) => ({
             img: '/assets/location.png',
             name: place.location.name,
+            href: `/locations/${place.location.pk}/${place.slug}`,
             title: '',
             position: position
           }))

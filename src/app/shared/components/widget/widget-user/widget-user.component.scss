@@ -1,13 +1,16 @@
 .widget-user {
-  min-width: 470px;
+  min-width: 500px;
   color: #999999;
   font-size: 12px;
-  margin-left: 64px;
+  flex-grow: 1;
+  flex-basis: 700px;
+  justify-content: space-between;
+  flex-wrap: wrap;
   h2, h3, h4 {
     color: #000000;
     font-weight: 400;
     font-size: 22px;
-    margin: 12px 0 -8px 0;
+    margin: 17px 0 -8px 0;
   }
   h3 {
     font-size: 16px;
@@ -26,7 +29,7 @@
     color: #F13434;
   }
   .new-count {
-    margin-top: 8px;
+    margin-top: 14px;
   }
 }
 .mat-icon {

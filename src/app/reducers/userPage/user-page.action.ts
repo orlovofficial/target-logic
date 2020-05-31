@@ -1,9 +1,19 @@
 import { createAction, props } from '@ngrx/store';
-import { Post, User } from '../../shared/interfaces';
+import { Place, Post, Tag, User } from '../../shared/interfaces';
 
 export const load = createAction(
   '[User Page] Load',
   props<User>()
+);
+
+export const loadTag = createAction(
+  '[User Page] Load Tag',
+  props<Tag>()
+);
+
+export const loadPlace = createAction(
+  '[User Page] Load Place',
+  props<Place>()
 );
 
 export const pushPost = createAction(

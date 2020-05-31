@@ -38,4 +38,20 @@ export class InstagramApiService {
   getThread(comment_id: string, end_cursor: string): Observable<any> {
     return this.http.get<any>(`https://www.instagram.com/graphql/query/?query_hash=${QUERY_ID.thread}&variables=%7B%22comment_id%22%3A%22${comment_id}%22%2C%22first%22%3A50%2C%22after%22%3A%22${end_cursor}%22%7D`);
   }
+
+  getTag(tag: string): Observable<any> {
+    return this.http.get<any>(`https://www.instagram.com/explore/tags/${tag}/?__a=1`);
+  }
+
+  getPostsHashtag(tag: string, end_cursor: string): Observable<any> {
+    return this.http.get<any>(`https://www.instagram.com/graphql/query/?query_hash=${QUERY_ID.tag}&variables=%7B%22tag_name%22%3A%22${tag}%22%2C%22first%22%3A150%2C%22after%22%3A%22${end_cursor}%22%7D`);
+  }
+
+  getLocation(id: string, slug?: string): Observable<any> {
+    return this.http.get<any>(`https://www.instagram.com/explore/locations/${id}/${slug? slug +'/' : ''}?__a=1`);
+  }
+
+  getPostsLocation(id: string, end_cursor: string): Observable<any> {
+    return this.http.get<any>(`https://www.instagram.com/graphql/query/?query_hash=${QUERY_ID.location}&variables=%7B%22id%22%3A%22${id}%22%2C%22first%22%3A50%2C%22after%22%3A%22${end_cursor}%22%7D`);
+  }
 }

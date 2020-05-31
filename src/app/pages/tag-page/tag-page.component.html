@@ -1,0 +1,35 @@
+<div *ngIf="userPage$ | async as tag">
+  <div class="tag-info col" *ngIf="tag.hashtag?.name">
+    <h1>#{{tag.hashtag.name}}</h1>
+    <h5>{{(+tag.hashtag.edge_hashtag_to_media.count).toLocaleString('ru-RU')}} постов</h5>
+  </div>
+
+
+  <div class="user-media" *ngIf="tag.hashtag?.name">
+    <app-toolbar></app-toolbar>
+
+    <container-element [ngSwitch]="tag.viewType">
+      <app-gallery *ngSwitchCase="'gallery'"></app-gallery>
+      <app-editor *ngSwitchCase="'editor'"></app-editor>
+      <app-table-posts *ngSwitchDefault></app-table-posts>
+    </container-element>
+
+    <button *ngIf="!tag.isLoadNow && tag.data.edge_owner_to_timeline_media.page_info.has_next_page" mat-stroked-button class="more-button" color="primary" (click)="onLoad(tag.hashtag.name, tag.data.edge_owner_to_timeline_media.page_info)">
+      <mat-icon>add</mat-icon>
+      Загрузить еще
+    </button>
+  </div>
+
+  <div class="user-media row-center" *ngIf="!tag.hashtag?.name">
+    <mat-spinner diameter="32"></mat-spinner>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+

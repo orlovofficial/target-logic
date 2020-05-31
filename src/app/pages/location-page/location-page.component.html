@@ -1,0 +1,35 @@
+<div *ngIf="userPage$ | async as place">
+  <div class="tag-info col" *ngIf="place.location?.id">
+    <h1><mat-icon>location_on</mat-icon> {{place.location.name}}</h1>
+    <h5>{{(+place.location.edge_location_to_media.count).toLocaleString('ru-RU')}} постов</h5>
+  </div>
+
+
+  <div class="user-media" *ngIf="place.location?.id">
+    <app-toolbar></app-toolbar>
+
+    <container-element [ngSwitch]="place.viewType">
+      <app-gallery *ngSwitchCase="'gallery'"></app-gallery>
+      <app-editor *ngSwitchCase="'editor'"></app-editor>
+      <app-table-posts *ngSwitchDefault></app-table-posts>
+    </container-element>
+
+    <button *ngIf="!place.isLoadNow && place.data.edge_owner_to_timeline_media.page_info.has_next_page" mat-stroked-button class="more-button" color="primary" (click)="onLoad(place.location.id, place.data.edge_owner_to_timeline_media.page_info)">
+      <mat-icon>add</mat-icon>
+      Загрузить еще
+    </button>
+  </div>
+
+  <div class="user-media row-center" *ngIf="!place.location?.id">
+    <mat-spinner diameter="32"></mat-spinner>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
