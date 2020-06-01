@@ -113,8 +113,6 @@ export class WidgetUserComponent implements OnInit {
         this.chartData[0].data.unshift(+post.edge_media_preview_like.count);
         this.chartData[1].data.unshift(+post.edge_media_to_comment.count);
 
-
-
         return {
           ...result,
           posts: result.posts + 1,
