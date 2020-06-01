@@ -14,6 +14,7 @@ interface Analytics {
   postsMonth: number;
 }
 
+
 @Component({
   selector: 'app-widget-user',
   templateUrl: './widget-user.component.html',
@@ -74,7 +75,7 @@ export class WidgetUserComponent implements OnInit {
         allLikes: 0,
         allComments: 0,
         allViews: 0,
-        followers: +data.edge_followed_by.count,
+        followers: +data.edge_followed_by?.count,
         postsWeek: 0,
         postsMonth: 0
       };
@@ -86,20 +87,20 @@ export class WidgetUserComponent implements OnInit {
         borderColor: 'rgb(63, 81, 181)',
         backgroundColor: 'rgba(63, 81, 181, 0.1)',
         borderWidth: 1,
-        pointHoverBorderColor: 'rgb(63, 81, 181)',
-        pointHoverBackgroundColor:'rgb(255, 255, 255)',
-        pointBorderColor: 'rgb(63, 81, 181)',
-        pointBackgroundColor:'rgb(63, 81, 181)'
+        pointHoverBorderColor: 'rgba(63, 81, 181, 0)',
+        pointHoverBackgroundColor:'rgba(255, 255, 255, 0)',
+        pointBorderColor: 'rgba(63, 81, 181, 0)',
+        pointBackgroundColor:'rgba(63, 81, 181, 0)'
       },{
         data: [],
         label: 'Комментарии',
         borderColor: 'rgb(31, 173, 87)',
         backgroundColor: 'rgba(31, 173, 87, 0.2)',
         borderWidth: 1,
-        pointHoverBorderColor: 'rgb(31, 173, 87)',
-        pointHoverBackgroundColor:'rgb(255, 255, 255)',
-        pointBorderColor: 'rgb(31, 173, 87)',
-        pointBackgroundColor:'rgb(31, 173, 87)'
+        pointHoverBorderColor: 'rgba(31, 173, 87, 0)',
+        pointHoverBackgroundColor:'rgba(255, 255, 255, 0)',
+        pointBorderColor: 'rgba(31, 173, 87, 0)',
+        pointBackgroundColor:'rgba(31, 173, 87, 0)'
       }];
 
       this.analytics = data.edge_owner_to_timeline_media.edges.reduce((result: Analytics, post: Post) => {

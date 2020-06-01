@@ -63,7 +63,7 @@ export class TablePostsComponent implements OnInit {
         edge_media_to_caption: post.edge_media_to_caption.edges[0]?.node.text,
         taken_at_timestamp: new Date(+post.taken_at_timestamp * 1000),
         owner: post.owner.username,
-        __typename: post.__typename.slice(5)
+        __typename: post.__typename?.slice(5)
       })));
       this.dataSource.sort = this.sort;
     });

@@ -43,7 +43,7 @@ export class ToolbarCommentsComponent implements OnInit {
                 ...node.edge_threaded_comments,
                 edges: node.edge_threaded_comments.edges.map(({node}) => ({...node, created_at: new Date(node.created_at * 1000)}))
               }
-            }))],
+            })).reverse()],
             page_info: data.shortcode_media.edge_media_to_parent_comment.page_info
           }));
         },

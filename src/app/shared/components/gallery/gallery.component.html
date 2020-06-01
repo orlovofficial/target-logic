@@ -5,7 +5,7 @@
 
     <a class="gallery__cover" [routerLink]="['../../post', item.shortcode]">
 
-      <mat-icon *ngIf="item.__typename === 'GraphVideo'" class="post-type">videocam</mat-icon>
+      <mat-icon *ngIf="item.__typename === 'GraphVideo' || item.is_video" class="post-type">videocam</mat-icon>
       <mat-icon *ngIf="item.__typename === 'GraphSidecar'" class="post-type">view_carousel</mat-icon>
 
       <h5>
