@@ -43,7 +43,8 @@ import { ChartsModule } from 'ng2-charts';
 import { TagPageComponent } from './pages/tag-page/tag-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { LocationPageComponent } from './pages/location-page/location-page.component';
-import { GoogleMapsModule } from '@angular/google-maps';
+// import { GoogleMapsModule } from '@angular/google-maps';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 
 @NgModule({
@@ -88,6 +89,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MatTooltipModule,
     ChartsModule,
     // GoogleMapsModule,
+    CarouselModule,
     StoreModule.forRoot({
       search: searchReducer,
       userPage: userPageReducer,

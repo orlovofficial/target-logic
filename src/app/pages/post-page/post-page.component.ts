@@ -8,6 +8,7 @@ import { PostPageState } from '../../shared/interfaces';
 import { switchMap } from 'rxjs/operators';
 import { clear, load } from '../../reducers/postPage/post-page.action';
 import { loadToggle, pushComment } from '../../reducers/postPage/post-page.action';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-post-page',
@@ -15,6 +16,21 @@ import { loadToggle, pushComment } from '../../reducers/postPage/post-page.actio
   styleUrls: ['./post-page.component.scss']
 })
 export class PostPageComponent implements OnInit {
+  customOptions: OwlOptions = {
+    loop: false,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: true,
+    navSpeed: 400,
+    navText: ['<', '>'],
+    responsive: {
+      0: {
+        items: 1
+      }
+    },
+    nav: true
+  };
 
   postPage$: Observable<PostPageState>;
 
