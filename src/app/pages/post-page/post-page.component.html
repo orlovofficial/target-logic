@@ -3,39 +3,7 @@
 
 
     <div class="row">
-      <div class="start space-right">
-        <ng-container *ngIf="post.data.edge_sidecar_to_children; else singleCard">
 
-          <div class="carousel">
-            <owl-carousel-o [options]="customOptions">
-              <ng-container *ngFor="let slide of post.data.edge_sidecar_to_children.edges">
-                <ng-container *ngIf="!slide.node.is_video">
-                  <ng-template carouselSlide [width]="480">
-                    <img [src]="slide.node.display_url">
-                  </ng-template>
-                </ng-container>
-
-                <ng-container *ngIf="slide.node.is_video">
-                  <ng-template carouselSlide [width]="480">
-                    <video controls="controls" poster="{{slide.node.display_url}}" preload="none" width="480">
-                      <source src="{{slide.node.video_url}}" type="video/mp4">
-                    </video>
-                  </ng-template>
-                </ng-container>
-              </ng-container>
-            </owl-carousel-o>
-          </div>
-
-
-        </ng-container>
-        <ng-template #singleCard>
-          <video *ngIf="post.data.is_video" controls="controls" poster="{{post.data.display_url}}" preload="none" width="480">
-            <source src="{{post.data.video_url}}" type="video/mp4">
-          </video>
-
-          <img *ngIf="!post.data.is_video" src="{{post.data.display_url}}" width="480">
-        </ng-template>
-      </div>
       <div class="col start">
         <div class="row">
           <a [routerLink]="['../../user', post.data.owner.username]">
@@ -53,7 +21,38 @@
             </h4>
           </div>
         </div>
-        <div class="space-top backaccent">
+        <div class="space-top space-right backaccent">
+          <div class="media">
+            <ng-container *ngIf="post.data.edge_sidecar_to_children; else singleCard">
+              <div class="carousel">
+                <owl-carousel-o [options]="customOptions">
+                  <ng-container *ngFor="let slide of post.data.edge_sidecar_to_children.edges">
+                    <ng-container *ngIf="!slide.node.is_video">
+                      <ng-template carouselSlide [width]="480">
+                        <img [src]="slide.node.display_url">
+                      </ng-template>
+                    </ng-container>
+
+                    <ng-container *ngIf="slide.node.is_video">
+                      <ng-template carouselSlide [width]="480">
+                        <video controls="controls" poster="{{slide.node.display_url}}" preload="none" width="480">
+                          <source src="{{slide.node.video_url}}" type="video/mp4">
+                        </video>
+                      </ng-template>
+                    </ng-container>
+                  </ng-container>
+                </owl-carousel-o>
+              </div>
+            </ng-container>
+            <ng-template #singleCard>
+              <video *ngIf="post.data.is_video" controls="controls" poster="{{post.data.display_url}}" preload="none" width="480">
+                <source src="{{post.data.video_url}}" type="video/mp4">
+              </video>
+
+              <img *ngIf="!post.data.is_video" src="{{post.data.display_url}}" width="480">
+            </ng-template>
+          </div>
+
           <h4>{{post.data.taken_at_timestamp | date: 'dd.MM.yyyy HH:mm'}}</h4>
           <p>{{post.data.edge_media_to_caption.edges[0]?.node.text}}</p>
           <div class="row rating">

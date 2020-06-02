@@ -1,5 +1,6 @@
 section {
-  min-height: 60vh;
+  min-height: 33vh;
+  padding: 32px 0;
   width: 60vw;
   display: flex;
   justify-content: center;
@@ -25,7 +26,7 @@ a {
   color: #3f51b5;
 }
 h1 {
-  font: 400 2rem Roboto, "Helvetica Neue", sans-serif;
+  font: 400 1.8rem Roboto, "Helvetica Neue", sans-serif;
   color: #000000;
 }
 h2 {
@@ -66,7 +67,7 @@ p {
   align-items: center;
 }
 .wrapper {
-  width: 60vw;
+  width: 80vw;
 }
 .footer {
   display: flex;
@@ -84,5 +85,5 @@ p {
   min-height: 33.33vh;
 }
 .h66 {
-  min-height: 66.66vh;
+  min-height: 60vh;
 }

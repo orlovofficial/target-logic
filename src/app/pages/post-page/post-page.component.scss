@@ -33,8 +33,11 @@ h4 {
   h4 {
     color: rgba(0, 0, 0, 0.5);
     font-size: 14px;
+    margin-top: 12px;
     margin-bottom: 12px;
   }
+  max-width: 440px;
+  overflow: hidden;
   border-radius: 20px;
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
@@ -72,5 +75,6 @@ h4 {
 .carousel {
   width: 480px;
 }
-
-
+.media {
+  margin: -15px -20px 0 -20px;
+}
